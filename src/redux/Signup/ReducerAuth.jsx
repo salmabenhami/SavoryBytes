@@ -1,6 +1,6 @@
 const initialState = {
   isAuthenticated: false,
-  currentUser: [],
+  currentUser: null,
   users: [ 
     {
       id: 1,

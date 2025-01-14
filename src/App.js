@@ -4,11 +4,11 @@ import Header from './components/Header/Header';
 import { Routes, Route } from 'react-router-dom';
 import Signup from './components/Authentification/Signup';
 import Login from './components/Authentification/Login';
-import Home from './components/Home';
 import Footer from './components/Footer/Footer';
-import Categories from './components/Categorie';
-import Mode from './components/Mode';
-import DashBoard from './components/Dashboard';
+import Home from './components/pages/Home';
+import Categories from './components/pages/Categorie';
+import Mode from './components/pages/Mode';
+import DashBoard from './components/pages/Dashboard';
 
 const App=()=>{
   return(
