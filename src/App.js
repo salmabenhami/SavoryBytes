@@ -11,6 +11,7 @@ import Mode from './components/pages/Mode';
 import DashBoard from './components/pages/Dashboard';
 import ManageUsers from './components/pages/ManageUsers';
 import UpdateUser from './components/pages/UpdateUser';
+import AddUser from './components/pages/AddUser';
 
 const App=()=>{
   return(
@@ -26,6 +27,7 @@ const App=()=>{
           <Route path="/:mode/:categ" element={<Categories/>} />
           <Route path="/manage-users" element={<ManageUsers/>} />
           <Route path='/manage-users/:id' element={<UpdateUser/>}/>
+          <Route path='/manage-users/add-user' element={<AddUser/>}/>
 
         </Routes>
       </div>

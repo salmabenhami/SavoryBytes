@@ -7,8 +7,8 @@ import { removeuser } from "../../redux/Signup/ActionCreator"
 const ManageUsers=()=>{
     const users = useSelector((state)=> state.users)
     const dispatch = useDispatch()
-
-    return(<div>
+    console.log(users)
+    return(<div className="body">
         <h1 className="title">Users Management</h1>
         <Link to='/manage-users/add-user'>
             <div className="add">

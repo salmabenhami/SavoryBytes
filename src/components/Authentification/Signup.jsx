@@ -37,6 +37,10 @@ const Signup = () => {
       dispatch(signupFailure("Email is already registered."));
       return false;
     }
+    if (users.find((user) => user.username === username)) {
+      dispatch(signupFailure("User Name is already used."));
+      return false;
+    }
     return true;
   };
   

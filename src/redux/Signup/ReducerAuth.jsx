@@ -85,7 +85,7 @@ const authReducer = (state = initialState, action) => {
       return { ...state, isAuthenticated: false, currentUser: null };
     case "ADD_USER":
       return { ...state,
-        users: [...state.users, action.payload]
+        users: [...state.users,action.payload,]
       };
     case "REMOVE_USER":
       return{
