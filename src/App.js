@@ -9,6 +9,8 @@ import Home from './components/pages/Home';
 import Categories from './components/pages/Categorie';
 import Mode from './components/pages/Mode';
 import DashBoard from './components/pages/Dashboard';
+import ManageUsers from './components/pages/ManageUsers';
+import UpdateUser from './components/pages/UpdateUser';
 
 const App=()=>{
   return(
@@ -22,6 +24,9 @@ const App=()=>{
           <Route path="/login" element={<Login/>} />
           <Route path="/:mode" element={<Mode/>} />
           <Route path="/:mode/:categ" element={<Categories/>} />
+          <Route path="/manage-users" element={<ManageUsers/>} />
+          <Route path='/manage-users/:id' element={<UpdateUser/>}/>
+
         </Routes>
       </div>
       <Footer/>

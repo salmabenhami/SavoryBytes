@@ -35,7 +35,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     if (validate()) {
-      dispatch(loginSuccess({ name: user.name, role: user.role }));
+      dispatch(loginSuccess({ username: user.username, role: user.role }));
       navigate("/");
       resetForm();
     }

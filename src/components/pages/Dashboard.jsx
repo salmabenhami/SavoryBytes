@@ -1,13 +1,20 @@
 import { useSelector } from 'react-redux';
 import '../../styles/staticsStyle.scss';
-import '../../styles/dashboard.css';
+import '../../styles/dashboardStyle.css';
 import { PiUsersThreeLight } from "react-icons/pi";
 import { LiaComments } from "react-icons/lia";
 
 const DashBoard = () => {
-  const { name, role } = useSelector((state) => state.currentUser || {});
-  console.log(name, role);
-
+  const { username, role } = useSelector((state) => state.currentUser || {});
+  const Comments = useSelector((state) => state.comments)
+  const Users = useSelector((state) => state.users)
+  const totalComments = Comments
+  const totalUsers = Users.length
+  console.log(username, role, totalUsers);
+  const types = [
+    {type:'Users', total:totalUsers, icon:<PiUsersThreeLight/>},
+    {type:'Comments', total:totalComments, icon:<LiaComments/>}
+  ];
   const categories = [
     { cat: "Main Course", color: '#FF6838' },
     { cat: "Appetizer", color: '#FFC820' },
@@ -20,26 +27,20 @@ const DashBoard = () => {
 
   return (
     <div className="dashboard">
-      <h1 className="welcome">Welcome {role} {name}!</h1>
+      <h1 className="welcome">Welcome {role} {username}!</h1>
       <div className="totals">
-        <div className="up-box">
-          <div className="content">
-            <div className="writhing">
-              <h3>Users:</h3>
-              <h2>27</h2>
+        {types.map((type, idx)=>(
+          <div className="up-box" key={idx}>
+            <div className="content">
+              <div className="writhing">
+                <h3>{type.type}</h3>
+                <h2>{type.total}</h2>
+              </div>
+              <p>{type.icon} </p>
             </div>
-            <p><PiUsersThreeLight /></p>
           </div>
-        </div>
-        <div className="up-box">
-          <div className="content">
-            <div className="writhing">
-              <h3>Comments:</h3>
-              <h2>270</h2>
-            </div>
-            <p><LiaComments /></p>
-          </div>
-        </div>
+        ))}
+        
       </div>
       <div className="statics">
         {['Normal', 'Diet', 'Lactos-Free'].map((type, idx) => (
@@ -76,6 +77,20 @@ const DashBoard = () => {
             </div>
           </div>
         ))}
+        <div className="top-active-users">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email </th>
+                        <th>comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
       </div>
     </div>
   );
