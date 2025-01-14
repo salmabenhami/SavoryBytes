@@ -1,6 +1,6 @@
 const initialState = {
   isAuthenticated: false,
-  currentUser: null,
+  currentUser: [],
   users: [ 
     {
       id: 1,
@@ -36,6 +36,7 @@ const authReducer = (state = initialState, action) => {
         error: action.payload,
       };
     case "LOGIN_SUCCESS":
+      console.log(action.payload)
       return { ...state, isAuthenticated: true, currentUser: action.payload };
     case "LOGIN_FAILURE":
       return {

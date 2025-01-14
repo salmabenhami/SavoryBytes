@@ -17,22 +17,29 @@ const Signup = () => {
   const [terms, setTerms] = useState(false);
 
   const validate = () => {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/;
+  
     if (!name || !email || !password || !confirmPassword || !terms) {
       dispatch(signupFailure("All fields are required."));
       return false;
     }
+    if (!passwordRegex.test(password)) {
+      dispatch(signupFailure(
+        "Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a special character."
+      ));
+      return false;
+    }
     if (password !== confirmPassword) {
       dispatch(signupFailure("Passwords do not match."));
-      alert("Passwords do not match.");
       return false;
     }
     if (users.find((user) => user.email === email)) {
       dispatch(signupFailure("Email is already registered."));
-      alert("Email is already registered.");
       return false;
     }
     return true;
   };
+  
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -95,7 +102,7 @@ const Signup = () => {
         <input type="checkbox" name="terms" id="terms" checked={terms} onChange={(e) => setTerms(e.target.checked)} />
         <label htmlFor="terms">I agree to the terms & policy</label>
         </div>
-        {error && <p className="error">All fields are required.</p>}
+        {error && <p className="error">{error}</p>}
         <button type="submit">Sign Up</button>
       </form>
       </div>

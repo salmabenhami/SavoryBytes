@@ -8,6 +8,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const users = useSelector((state) => state.users);
+  const error = useSelector((state) => state.error);
+  
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,7 +35,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     if (validate()) {
-      dispatch(loginSuccess(user.name));
+      dispatch(loginSuccess({ name: user.name, role: user.role }));
       navigate("/");
       resetForm();
     }
@@ -66,6 +68,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          {error && <p className="error">{error}</p>}
           <button type="submit">Log in</button>
         </form>
       </div>
