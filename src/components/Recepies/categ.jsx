@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { selectFilteredRecipes  } from  '../../redux/recepiesReducer';
 import { Link } from 'react-router-dom';

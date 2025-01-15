@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signupSuccess, signupFailure } from "../../redux/Signup/ActionCreator";
+import { signupSuccess, signupFailure } from "../../redux/Signup/ReducerAuth";
 import img from "../images/login.jpg";
 import { useNavigate } from "react-router";
 
 const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const users = useSelector((state) => state.users);
-  const error = useSelector((state) => state.error);
+  const users = useSelector((state) => state.auth.users);
+  const error = useSelector((state) => state.auth.error);
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");

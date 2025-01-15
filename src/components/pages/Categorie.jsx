@@ -1,43 +1,31 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-// import { initialStateNormal } from "../../FichierRecepies/normalVf";
-// import { initialeStateLactoseFree } from "../../FichierRecepies/LactoseFreevf";
-// import { diet } from "../../FichierRecepies/dietFriendlyVf";
- 
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { selectFilteredRecipes  } from  '../../redux/recepiesReducer';
+import { Link } from 'react-router-dom';
 const Categories = () => {
   const { mode, categ } = useParams();
- 
-//   let recipes = [];
- 
-  // Filtrer les recettes en fonction du mode et de la catégorie
-//   if (mode === "Normal") {
-//     recipes = initialStateNormal.filter((recipe) => recipe.category === categ);
-//   } else if (mode === "diet") {
-//     recipes = diet.filter((recipe) => recipe.category === categ);
-//   } else if (mode === "lactose-free") {
-//     recipes = initialeStateLactoseFree.filter((recipe) => recipe.category === categ);
-//   }
- 
+
+  const recipes = useSelector(state => selectFilteredRecipes(state, mode, categ));
+
   return (
     <div>
-      <h1>Recettes pour {mode.toUpperCase()} - {categ.toUpperCase()}</h1>
-      {/* {recipes.length > 0 ? (
+      <h1>Recettes pour {mode} - {categ}</h1>
+      {recipes.length > 0 ? (
         <ul>
-          {recipes.map((recipe) => (
+          {recipes.map(recipe => (
             <li key={recipe.id}>
-              <h2>{recipe.recipeTitle}</h2>
-              <p>{recipe.description}</p>
-              <p>Rating: {recipe.rating}</p>
-              <p>Preparation Time: {recipe.preparationTime}</p>
-              <p>Cooking Time: {recipe.cookingTime}</p>
+ <Link to={`/recette/${mode}/${categ}/${recipe.recipeTitle.toLowerCase().replace(/ /g, '-')}`}>
+                {recipe.recipeTitle}
+              </Link>
             </li>
           ))}
         </ul>
       ) : (
         <p>Aucune recette trouvée pour cette catégorie.</p>
-      )} */}
+      )}
     </div>
   );
 };
- 
+
 export default Categories;

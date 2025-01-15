@@ -2,9 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import AboutChef from './about';
-import { Link } from 'react-router-dom';
 import img from '../images/img/cuisine.jpg';
-import Footer from '../Footer/Footer';
 
 const MainContainer = styled.div`
   background: ${props => props.theme.body};

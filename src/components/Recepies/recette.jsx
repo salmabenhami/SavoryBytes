@@ -76,8 +76,8 @@ const RecipeDetails = () => {
           {renderStars(recipe.rating)}
         </div>
       </div>
-      <div style={{margin: '0 auto', padding: 0 }}>
-      <div style={{ marginLeft:'20px',width:'50%',marginLeft:'20<px'}}>
+      <div style={{ margin: '0 auto', padding: 0 }}>
+      <div style={{ width:'50%', marginLeft:'20<px'}}>
       <img 
           src={recipe.picture} 
           style={{ 

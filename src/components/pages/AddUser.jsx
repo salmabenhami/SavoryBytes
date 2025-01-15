@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import '../../styles/FormStyle.css'
-import img from '../../images/bg.jpeg'
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { adduser } from "../../redux/Signup/ActionCreator";
+import { addUser } from "../../redux/Signup/ReducerAuth";
 
    function AddUser() {
-    const users = useSelector((state)=> state.users)
+    const users = useSelector((state)=> state.auth.users)
     const [newusername, setNewusername] = useState('')
     const [newemail, setNewemail] = useState('')
     const [newpassword, setNewpassword] = useState('')
@@ -39,7 +38,7 @@ import { adduser } from "../../redux/Signup/ActionCreator";
             bio: '', 
             joinedDate: new Date().toISOString().split('T')[0],
         }
-        dispatch(adduser(newUser))
+        dispatch(addUser(newUser))
         navigate('/manage-users ')
     }
      return (

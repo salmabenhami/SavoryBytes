@@ -5,11 +5,11 @@ import { PiUsersThreeLight } from "react-icons/pi";
 import { LiaComments } from "react-icons/lia";
 
 const DashBoard = () => {
-  const { username, role } = useSelector((state) => state.currentUser || {});
-  const Comments = useSelector((state) => state.comments)
-  const Users = useSelector((state) => state.users)
+  const { username, role } = useSelector((state) => state.auth.currentUser || {});
+  const Comments = useSelector((state) => state.auth.comments)
+  const users = useSelector((state) => state.auth.users)
   const totalComments = Comments
-  const totalUsers = Users.length
+  const totalUsers = users.length
   console.log(username, role, totalUsers);
   const types = [
     {type:'Users', total:totalUsers, icon:<PiUsersThreeLight/>},

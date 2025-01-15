@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import '../../styles/manageusersStyle.css'
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { updateuser } from "../../redux/Signup/ActionCreator";
+import { updateUser } from "../../redux/Signup/ReducerAuth";
 
 const UpdateUser=()=>{
     const {id} = useParams();
-    const users = useSelector((state)=> state.users)
-    const user = useSelector((state)=> state.users.find((u)=> u.id === parseInt(id)))
+    const users = useSelector((state)=> state.auth.users)
+    const user = useSelector((state)=> state.auth.users.find((u)=> u.id === parseInt(id)))
     const [newusername, setNewusername] = useState(user.username)
     const [newemail, setNewemail] = useState(user.email)
     const [newrole, setNewrole] = useState(user.role)
@@ -38,7 +38,7 @@ const UpdateUser=()=>{
             email:newemail,
             role:newrole,
         }
-        dispatch(updateuser(newUser))
+        dispatch(updateUser(newUser))
         navigate('/manage-users ')
     }
 

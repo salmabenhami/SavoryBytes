@@ -13,6 +13,7 @@ const recipesSlice = createSlice({
   name: 'recipes',
   initialState,
   reducers: {
+    affichage:(state) => state,
     addRecipe: (state, action) => {
       const { mode, recipe } = action.payload;
       state[mode.toLowerCase()].push(recipe);
@@ -31,7 +32,6 @@ const recipesSlice = createSlice({
   },
 });
 export const selectCategories = (state) => {
-  // Récupérer les catégories uniques à partir des recettes
   const categories = new Set();
   Object.values(state.recipes).forEach((recipes) => {
     recipes.forEach((recipe) => {
@@ -47,8 +47,7 @@ export const selectFilteredRecipes = (state, mode, category) => {
     .split(/[-_]/) 
     .map(word => word.charAt(0).toUpperCase() + word.slice(1)) 
     .join(' ');
-
-  // const recipes = state.recipes[normalizedMode]; 
+    
   if(normalizedMode === 'normal'){
     var recipes = state.recipes.normal;
   }
@@ -68,6 +67,25 @@ export const selectFilteredRecipes = (state, mode, category) => {
   return recipes.filter(recipe => recipe.category === normalizedCategory); 
 };
 
+export const getRecipesByMode = (state, mode) => {
+  const givenmode = mode.toLowerCase();  
+  if(givenmode === 'normal'){
+    var recipes = state.recipes.normal;
+  }
+  else if(givenmode === 'diet'){  
+     recipes = state.recipes.dietFriendly;
+  }
+  else if(givenmode === 'lactose-free'){
+     recipes = state.recipes.lactoseFree;
+  }
+  else{
+     recipes = state.recipes.normal;
+  }
+  if (!recipes) {
+    return [];
+  }
+  return recipes
+};
 
 export const { addRecipe, removeRecipe, updateRecipe } = recipesSlice.actions;
 

@@ -2,10 +2,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router"
 import '../../styles/manageusersStyle.css'
 import { TbUsersPlus } from "react-icons/tb";
-import { removeuser } from "../../redux/Signup/ActionCreator"
+import { removeUser } from "../../redux/Signup/ReducerAuth";
 
 const ManageUsers=()=>{
-    const users = useSelector((state)=> state.users)
+    const users = useSelector((state)=> state.auth.users)
     const dispatch = useDispatch()
     console.log(users)
     return(<div className="body">
@@ -42,7 +42,7 @@ const ManageUsers=()=>{
                         <td>{user.joinedDate}</td>
                         <td>
                             <Link to={`/manage-users/${user.id}`}><button className="upt">Update</button></Link>
-                            <button onClick={()=>dispatch(removeuser(user.id))} className="del">Delete</button>
+                            <button onClick={()=>dispatch(removeUser(user.id))} className="del">Delete</button>
                         </td>
                     </tr>
                 ))}
