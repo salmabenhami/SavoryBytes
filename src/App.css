@@ -141,8 +141,6 @@ li.dropdown {
 }
 /* Footer */
 .footer {
-  position: absolute;
-  margin-top: 90%;
   width: 100%;
   margin-top: 8%;
   background-color: #212121;

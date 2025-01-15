@@ -12,9 +12,11 @@ import DashBoard from './components/pages/Dashboard';
 import ManageUsers from './components/pages/ManageUsers';
 import UpdateUser from './components/pages/UpdateUser';
 import AddUser from './components/pages/AddUser';
+
 import Main from './components/pages/MainAbout'
 import Categories from './components/Recepies/categ';
 import RecipeDetails from './components/Recepies/recette';
+
 
 const App=()=>{
   return(
@@ -28,6 +30,10 @@ const App=()=>{
           <Route path="/login" element={<Login/>} />
           <Route path="/:mode" element={<Mode/>} />
           <Route path="/:mode/:categ" element={<Categories/>} />
+          <Route path="/manage-users" element={<ManageUsers/>} />
+          <Route path='/manage-users/:id' element={<UpdateUser/>}/>
+          <Route path='/manage-users/add-user' element={<AddUser/>}/>
+
         </Routes>
       </div>
     <Footer/>
