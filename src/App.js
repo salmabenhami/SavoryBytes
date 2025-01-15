@@ -33,6 +33,8 @@ const App=()=>{
           <Route path="/manage-users" element={<ManageUsers/>} />
           <Route path='/manage-users/:id' element={<UpdateUser/>}/>
           <Route path='/manage-users/add-user' element={<AddUser/>}/>
+          <Route path="about" element={<Main/>}/>
+          <Route path="recette/:mode/:categ/:title" element={<RecipeDetails/>} />
 
         </Routes>
       </div>

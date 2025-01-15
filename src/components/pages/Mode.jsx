@@ -1,6 +1,5 @@
 import { useParams } from "react-router";
 
-import { useParams } from "react-router";
 
 const Mode=()=>{
     const {mode} = useParams()
