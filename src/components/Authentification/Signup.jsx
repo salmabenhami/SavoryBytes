@@ -72,6 +72,9 @@ const Signup = () => {
     setTerms(false)
   };
   return (
+  <div className="div">
+
+    <p className="encouragement"> Join us for delicious meals and fun! Start your culinary journey today! </p>
     <div className="form-body">
       <div className="img">
         <img src={img} alt="imagLogin" />
@@ -112,6 +115,8 @@ const Signup = () => {
       </form>
       </div>
     </div>
+  </div>
+
   );
 };
 
