@@ -79,10 +79,10 @@ li.dropdown {
   display: none;
   position: absolute;
   min-width: 160px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(250, 249, 249, 0.186);
   border-radius: 8px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(9px);
   border: 1px solid rgba(255, 255, 255, 0.17);
 }
 
