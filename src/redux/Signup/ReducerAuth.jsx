@@ -1,4 +1,3 @@
-
 const initialState = {
   isAuthenticated: false,
   currentUser: null,

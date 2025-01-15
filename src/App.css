@@ -82,7 +82,7 @@ li.dropdown {
   background: rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(2.8px);
+  backdrop-filter: blur(0.5px);
   -webkit-backdrop-filter: blur(2.8px);
   border: 1px solid rgba(255, 255, 255, 0.17);
 }
@@ -256,7 +256,7 @@ li.dropdown {
 .form button{
   margin: 5%;
   padding: 5px 12px;
-  width: 20%;
+  max-width: 30%;
   font-size: 16px;
   font-weight: bold;
   border: none;

@@ -24,11 +24,11 @@ const UpdateUser=()=>{
             setError("All fields are required!");
             return;
         }
-        if (users.find((user) => user.email === newemail)) {
+        if (user.email !== newemail && users.find((user) => user.email === newemail)) {
             setError("Email is already registered.");
               return false;
             }
-        if (users.find((user) => user.username === newusername)) {
+        if (user.username !== newusername && users.find((user) => user.username === newusername)) {
             setError("User Name is already registered.");
                 return false;
             }
