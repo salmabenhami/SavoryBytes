@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess, loginFailure } from "../../redux/Signup/ActionCreator";
-import img from "../../images/login.jpg";
+import img from "../images/login.jpg";
 import { useNavigate } from "react-router";
 
 const Login = () => {
