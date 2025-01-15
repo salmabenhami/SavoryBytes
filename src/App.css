@@ -82,8 +82,7 @@ li.dropdown {
   background: rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(2.8px);
-  -webkit-backdrop-filter: blur(2.8px);
+  backdrop-filter: blur(1px);
   border: 1px solid rgba(255, 255, 255, 0.17);
 }
 
@@ -273,4 +272,54 @@ li.dropdown {
   font-size: 12px;
   color: red;
   text-align: left;
+}
+/* RecipeDetails.css */
+.star-rating {
+  display: flex;
+}
+
+.star {
+  font-size: 1.5rem;
+  color: #d3d3d3;
+}
+
+.star.filled {
+  color: #B55D51;
+}
+ul {
+  list-style-type: none;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+input[type="checkbox"] {
+  accent-color: #B55D51; /* Pour les navigateurs qui supportent accent-color */
+  margin-right: 0.5rem;
+}
+
+/* Pour les navigateurs qui ne supportent pas accent-color */
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  border: 2px solid #B55D51;
+  width: 16px;
+  height: 16px;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #B55D51;
+  color: #fff;
+  
+}
+
+input[type="checkbox"]:checked::after {
+  content: '✔';
+  margin-bottom: 2px;
+  font-size: 14px;
 }
