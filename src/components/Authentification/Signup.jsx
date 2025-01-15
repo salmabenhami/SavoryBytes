@@ -10,7 +10,7 @@ const Signup = () => {
   const users = useSelector((state) => state.users);
   const error = useSelector((state) => state.error);
 
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -19,7 +19,7 @@ const Signup = () => {
   const validate = () => {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/;
   
-    if (!name || !email || !password || !confirmPassword || !terms) {
+    if (!username || !email || !password || !confirmPassword || !terms) {
       dispatch(signupFailure("All fields are required."));
       return false;
     }
@@ -37,6 +37,10 @@ const Signup = () => {
       dispatch(signupFailure("Email is already registered."));
       return false;
     }
+    if (users.find((user) => user.username === username)) {
+      dispatch(signupFailure("User Name is already used."));
+      return false;
+    }
     return true;
   };
   
@@ -46,10 +50,11 @@ const Signup = () => {
     if (validate()) {
       const newUser = {
         id: users.length + 1,
-        name,
+        username,
         email,
         password,
         role: "user",
+        joinedDate: new Date(),
       };
       dispatch(signupSuccess(newUser));
       alert('Registration successful!');
@@ -60,7 +65,7 @@ const Signup = () => {
   console.log(users)
 
   const resetForm = () => {
-    setName("");
+    setUsername("");
     setEmail("");
     setPassword("");
     setConfirmPassword("");
@@ -76,9 +81,9 @@ const Signup = () => {
       <form onSubmit={handleSignup}>
         <input
           type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          placeholder="UserName"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <input
           type="email"

@@ -9,6 +9,9 @@ import Home from './components/pages/Home';
 // import Categories from './components/pages/Categorie';
 import Mode from './components/pages/Mode';
 import DashBoard from './components/pages/Dashboard';
+import ManageUsers from './components/pages/ManageUsers';
+import UpdateUser from './components/pages/UpdateUser';
+import AddUser from './components/pages/AddUser';
 import Main from './components/pages/MainAbout'
 import Categories from './components/Recepies/categ';
 import RecipeDetails from './components/Recepies/recette';
@@ -25,9 +28,6 @@ const App=()=>{
           <Route path="/login" element={<Login/>} />
           <Route path="/:mode" element={<Mode/>} />
           <Route path="/:mode/:categ" element={<Categories/>} />
-          <Route path="/about" element={<Main/>} />
-          <Route path="/recette/:mode/:categ/:title" element={<RecipeDetails />} />
-
         </Routes>
       </div>
     <Footer/>
