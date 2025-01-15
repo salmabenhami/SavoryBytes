@@ -6,9 +6,12 @@ import Signup from './components/Authentification/Signup';
 import Login from './components/Authentification/Login';
 import Footer from './components/Footer/Footer';
 import Home from './components/pages/Home';
-import Categories from './components/pages/Categorie';
+// import Categories from './components/pages/Categorie';
 import Mode from './components/pages/Mode';
 import DashBoard from './components/pages/Dashboard';
+import Main from './components/pages/MainAbout'
+import Categories from './components/Recepies/categ';
+import RecipeDetails from './components/Recepies/recette';
 
 const App=()=>{
   return(
@@ -22,9 +25,12 @@ const App=()=>{
           <Route path="/login" element={<Login/>} />
           <Route path="/:mode" element={<Mode/>} />
           <Route path="/:mode/:categ" element={<Categories/>} />
+          <Route path="/about" element={<Main/>} />
+          <Route path="/recette/:mode/:categ/:title" element={<RecipeDetails />} />
+
         </Routes>
       </div>
-      <Footer/>
+    <Footer/>
     </div>
   )
 }
