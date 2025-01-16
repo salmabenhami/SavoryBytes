@@ -55,7 +55,9 @@ tr:hover {
 }
 table button{
     margin: 5px;
-    padding: 2px 8px;
+    padding: 4px 12px;
+    border: none;
+    border-radius: 8px;
 }
 table .del{
     background-color: #be433276;
@@ -64,4 +66,38 @@ table .del{
 table .upt{
     background-color: #bebe3276;
     
+}
+.sortuser{
+    font-size: 18px;
+    padding: 4px 12px ;
+    cursor: pointer;
+}
+.search-container {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 20px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 40px 10px 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border 0.2s;
+
+    &:focus {
+        border-color: #1e4bd1;
+    }
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #666;
 }

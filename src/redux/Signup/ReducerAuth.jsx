@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   isAuthenticated: false,
   currentUser: null,
+  searchList:null,
   users: [
     {
       id: 1,
@@ -96,6 +97,42 @@ const authSlice = createSlice({
         user.role = role;
       }
     },
+    searchuser(state, action){
+      return{
+        ...state,
+        searchList: state.users.filter((user)=> user.username.toLocaleLowerCase().includes(action.payload) || user.email.includes(action.payload))
+      }
+    },
+    sortdate(state, action){
+      const sortOrder = action.payload;
+      if (sortOrder === 'asc') {
+        return {
+          ...state,
+          users: [...state.users].sort((a, b) => new Date(a.joinedDate) - new Date(b.joinedDate)),
+        };
+      } else if (sortOrder === 'desc') {
+        return {
+          ...state,
+          users: [...state.users].sort((a, b) => new Date(b.joinedDate) - new Date(a.joinedDate)),
+        };
+      }
+        return state;
+    },
+    sortrole(state, action){
+      const sortOrder = action.payload;
+      if (sortOrder === 'asc') {
+        return {
+          ...state,
+          users: [...state.users].sort((a, b) => a.role.localeCompare(b.role)),
+        };
+      } else if (sortOrder === 'desc') {
+        return {
+          ...state,
+          users: [...state.users].sort((a, b) => b.role.localeCompare(a.role)),
+        };
+      }
+      return state;
+    },
   },
 });
 
@@ -108,6 +145,9 @@ export const {
   addUser,
   removeUser,
   updateUser,
+  sortdate,
+  searchuser,
+  sortrole,
 } = authSlice.actions;
 
 export default authSlice.reducer;

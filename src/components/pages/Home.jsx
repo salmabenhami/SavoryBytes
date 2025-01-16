@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router";
 
 const Home = () => {
-  const { username, role } = useSelector((state) => state.currentUser || {});
+  const { username, role } = useSelector((state) => state.auth.currentUser || {});
   const { normal, dietFriendly, lactoseFree } = useSelector((state) => state.recipes);
 
   const allRecipes = [...normal, ...dietFriendly, ...lactoseFree];
