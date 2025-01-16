@@ -54,6 +54,8 @@ const Signup = () => {
         email,
         password,
         role: "user",
+        bio:'',
+        profilePicture:'',
         joinedDate: new Date(),
       };
       dispatch(signupSuccess(newUser));

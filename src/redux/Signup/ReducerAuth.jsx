@@ -86,8 +86,12 @@ const authSlice = createSlice({
       state.users.push(action.payload);
     },
     removeUser(state, action) {
-      state.users = state.users.filter((u) => u.id !== action.payload);
-    },
+      if (state.currentUser.id !== action.payload) {
+          state.users = state.users.filter((u) => u.id !== action.payload);
+      } else {
+          alert("An Admin cannot delete themselves.");
+      }
+  },
     updateUser(state, action) {
       const { id, username, email, role } = action.payload;
       const user = state.users.find((u) => u.id === id);
