@@ -13,8 +13,8 @@ export const initialeStateLactoseFree=[
         "rating": 4.5,
         "date": "2025-01-14",
         "comments": [
-            {"user": "User1", "comment": "Delicious and spicy!", "rating": 5},
-            {"user": "User2", "comment": "Loved the flavors.", "rating": 4}
+            {"id":"1","user": "5", "comment": "Delicious and spicy!", "rating": 5},
+            {"id":"2","user": "2", "comment": "Loved the flavors.", "rating": 4}
         ],
         "ingredients": {
             "noodles": "200g",
@@ -59,8 +59,8 @@ export const initialeStateLactoseFree=[
         "rating": 4.7,
         "date": "2025-01-14",
         "comments": [
-            {"user": "User1", "comment": "Very comforting and delicious.", "rating": 5},
-            {"user": "User2", "comment": "Perfect for a cold day.", "rating": 4}
+            {"id":"1","user": "3", "comment": "Very comforting and delicious.", "rating": 5},
+            {"id":"2","user": "5", "comment": "Perfect for a cold day.", "rating": 4}
         ],
         "ingredients": {
             "chicken_breasts": "2",
@@ -105,8 +105,8 @@ export const initialeStateLactoseFree=[
         "rating": 4.8,
         "date": "2025-01-14",
         "comments": [
-            {"user": "User1", "comment": "So easy to make and so tasty!", "rating": 5},
-            {"user": "User2", "comment": "Best focaccia I've ever had.", "rating": 4}
+            {"id":"1","user": "4", "comment": "So easy to make and so tasty!", "rating": 5},
+            {"id":"2","user": "2", "comment": "Best focaccia I've ever had.", "rating": 4}
         ],
         "ingredients": {
             "flour": "500g",
@@ -149,8 +149,8 @@ export const initialeStateLactoseFree=[
         "rating": 4.5,
         "date": "2025-01-14",
         "comments": [
-            {"user": "User1", "comment": "So refreshing and delicious!", "rating": 5},
-            {"user": "User2", "comment": "Perfect for summer.", "rating": 4}
+            {"id":"1","user": "4", "comment": "So refreshing and delicious!", "rating": 5},
+            {"id":"2","user": "2", "comment": "Perfect for summer.", "rating": 4}
         ],
         "ingredients": {
             "strawberries": "2 cups, chopped",
@@ -188,8 +188,8 @@ export const initialeStateLactoseFree=[
         "rating": 4.7,
         "date": "2025-01-14",
         "comments": [
-            {"user": "User1", "comment": "So crispy and delicious!", "rating": 5},
-            {"user": "User2", "comment": "Best egg rolls I've ever had.", "rating": 4}
+            {"id":"1","user": "5", "comment": "So crispy and delicious!", "rating": 5},
+            {"id":"2","user": "4", "comment": "Best egg rolls I've ever had.", "rating": 4}
         ],
         "ingredients": {
             "egg_roll_wrappers": "12",

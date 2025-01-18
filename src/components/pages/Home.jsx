@@ -14,11 +14,11 @@ const Home = () => {
       <p>Your role is: {role || "N/A"}</p>
       {allRecipes && allRecipes.length > 0 ? (
         <ul>
-          {allRecipes.map(recipe => {
+          {allRecipes.map((recipe, idx) => {
             const mode = recipe.mode;
             const categ = recipe.category;
             return (
-              <li key={recipe.id}>
+              <li key={idx}>
                 <Link
                   to={`/recette/${mode}/${categ}/${encodeURIComponent(
                     recipe.recipeTitle.toLowerCase().replace(/ /g, '-')
