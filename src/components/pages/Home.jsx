@@ -6,7 +6,6 @@ import "../../styles/CardStyle.css";
 import { div } from "framer-motion/client";
 
 const Home = () => {
-  const { username, role } = useSelector((state) => state.auth.currentUser || {});
   const { normal, dietFriendly, lactoseFree } = useSelector((state) => state.recipes);
 
   const allRecipes = [...normal, ...dietFriendly, ...lactoseFree];
@@ -18,11 +17,11 @@ const Home = () => {
     <div>
       {top10Recipes.length > 0 ? (
         <div className="card-container">
-          {top10Recipes.map(((recipe), idx) => {
+          {top10Recipes.map((recipe) => {
             const mode = recipe.mode;
             const categ = recipe.category;
             return (
-              <li key={recipe.id}>
+              <div  className="card-wrapper">
                 <Link
                 key={recipe.id}
                 to={`/recette/${mode}/${categ}/${encodeURIComponent(
