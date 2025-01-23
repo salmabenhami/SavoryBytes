@@ -1,0 +1,201 @@
+
+.add-recipe-form-container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-recipe-form-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.add-recipe-form-container label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.add-recipe-form-container input[type="text"],
+.add-recipe-form-container input[type="number"],
+.add-recipe-form-container input[type="email"],
+.add-recipe-form-container select,
+.add-recipe-form-container textarea {
+    width: 90%;
+    padding: 10px;
+    margin-left: 5%;
+    margin-bottom: 5%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.add-recipe-form-container input:focus,
+.add-recipe-form-container select:focus,
+.add-recipe-form-container textarea:focus {
+    border-color: #888;
+    outline: none;
+}
+
+.add-recipe-form-container textarea {
+    resize: vertical;
+    min-height: 60px; /* Reduced height for preparation steps */
+}
+
+/* Styles for buttons */
+.add-recipe-form-container button {
+    padding: 5px 10px; /* Smaller padding */
+    font-size: 0.8rem; /* Smaller font size */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center; /* Center text in buttons */
+}
+
+.add-recipe-form-container .btn-danger {
+    background-color: #ff6b6b; /* Pastel red */
+    color: white;
+}
+
+.add-recipe-form-container .btn-danger:hover {
+    background-color: #ff5252; /* Darker pastel red */
+}
+
+.add-recipe-form-container .btn-add {
+    background-color: #6bccb9; /* Pastel green */
+    color: white;
+}
+
+.add-recipe-form-container .btn-add:hover {
+    background-color: #52b8a3; /* Darker pastel green */
+}
+
+.add-recipe-form-container .btn-submit {
+    background-color: #b66055d9; /* Main color */
+    color: white;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 20px;
+}
+
+.add-recipe-form-container .btn-submit:hover {
+    background-color: #ba4232d9; /* Hover color */
+}
+
+/* Styles for ingredient, step, and nutrition rows */
+.add-recipe-form-container .ingredient-row,
+.add-recipe-form-container .step-row,
+.add-recipe-form-container .nutrition-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.add-recipe-form-container .ingredient-row input,
+.add-recipe-form-container .nutrition-row input {
+    flex: 1;
+}
+
+.add-recipe-form-container .step-row textarea {
+    width: 100%;
+    min-height: 60px; /* Reduced height for preparation steps */
+}
+
+/* Specific styles for "Remove Step" and "Add Step" buttons */
+.add-recipe-form-container .step-row .button-group {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+    align-items: center; /* Align buttons vertically */
+}
+
+.add-recipe-form-container .step-row .btn-danger {
+    background-color: #ff6b6b; /* Pastel red */
+    color: white;
+    padding: 5px 10px; /* Smaller padding */
+    font-size: 0.8rem; /* Smaller font size */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center; /* Center text in buttons */
+}
+
+.add-recipe-form-container .step-row .btn-danger:hover {
+    background-color: #ff5252; /* Darker pastel red */
+}
+
+.add-recipe-form-container .step-row .btn-add {
+    background-color: #6bccb9; /* Pastel green */
+    color: white;
+    padding: 5px 10px; /* Smaller padding */
+    font-size: 0.8rem; /* Smaller font size */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center; /* Center text in buttons */
+}
+
+.add-recipe-form-container .step-row .btn-add:hover {
+    background-color: #52b8a3; /* Darker pastel green */
+}
+
+/* Styles for the "Remove Ingredient" button */
+.add-recipe-form-container .ingredient-row .btn-danger {
+    background-color: #ff6b6b; /* Pastel red */
+    color: white;
+    padding: 5px 10px; /* Smaller padding */
+    font-size: 0.8rem; /* Smaller font size */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center; /* Center text in buttons */
+}
+
+.add-recipe-form-container .ingredient-row .btn-danger:hover {
+    background-color: #ff5252; /* Darker pastel red */
+}
+
+/* Styles for the "Add Ingredient" button */
+.add-recipe-form-container .btn-add {
+    background-color: #6bccb9; /* Pastel green */
+    color: white;
+    padding: 5px 10px; /* Smaller padding */
+    font-size: 0.8rem; /* Smaller font size */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center; /* Center text in buttons */
+}
+
+.add-recipe-form-container .btn-add:hover {
+    background-color: #328c57; /* Darker pastel green */
+}
+
+@media (max-width: 768px) {
+    .add-recipe-form-container {
+        padding: 15px;
+    }
+
+    .add-recipe-form-container input,
+    .add-recipe-form-container textarea {
+        font-size: 0.9rem;
+    }
+
+    .add-recipe-form-container button {
+        font-size: 1rem;
+    }
+}

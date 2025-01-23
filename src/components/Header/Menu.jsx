@@ -28,6 +28,7 @@ const Menu=()=>{
         <ul>
             {role === 'admin' && <li><NavLink to="/dashboard" className="a">DashBoard</NavLink></li>}
             <li><NavLink to="/" className="a">Home</NavLink></li>
+            
             <li className="dropdown">
                 <Link>Modes</Link>
                 <div className="dropdown-content">
@@ -51,6 +52,7 @@ const Menu=()=>{
                 </div>
             </li>
             <li><NavLink to="/about" className="a"> About </NavLink></li>
+            <li><NavLink to="/profil" className="a">Profil</NavLink></li>
             {role === 'admin' && <li className="dropdown">
                 <Link>Manager</Link>
                 <div className="dropdown-content">

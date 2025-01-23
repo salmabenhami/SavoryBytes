@@ -1,36 +1,42 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router";
+import Card from "./Card";
+import "../../styles/CardStyle.css";
+import { div } from "framer-motion/client";
 
 const Home = () => {
   const { username, role } = useSelector((state) => state.auth.currentUser || {});
   const { normal, dietFriendly, lactoseFree } = useSelector((state) => state.recipes);
 
   const allRecipes = [...normal, ...dietFriendly, ...lactoseFree];
+  const top10Recipes = allRecipes
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 12);
 
   return (
     <div>
-      <h1>Welcome {username || "Guest"}!</h1>
-      <p>Your role is: {role || "N/A"}</p>
-      {allRecipes && allRecipes.length > 0 ? (
-        <ul>
-          {allRecipes.map(recipe => {
+      {top10Recipes.length > 0 ? (
+        <div className="card-container">
+          {top10Recipes.map((recipe) => {
             const mode = recipe.mode;
             const categ = recipe.category;
             return (
-              <li key={recipe.id}>
+              <div  className="card-wrapper">
                 <Link
-                  to={`/recette/${mode}/${categ}/${encodeURIComponent(
-                    recipe.recipeTitle.toLowerCase().replace(/ /g, '-')
-                  )}`}
-                >
-                  {recipe.recipeTitle}
-                </Link>
-              </li>
+                key={recipe.id}
+                to={`/recette/${mode}/${categ}/${encodeURIComponent(
+                  recipe.recipeTitle.toLowerCase().replace(/ /g, '-')
+                )}`}
+                 className="plain-link"
+              >
+                <Card recipe={recipe} />
+              </Link>
+              </div>
             );
           })}
-        </ul>
-      ) : (
+        </div>
+      )  : (
         <p>Aucune recette trouvée pour cette catégorie.</p>
       )}
     </div>

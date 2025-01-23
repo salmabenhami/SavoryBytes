@@ -53,7 +53,7 @@ const initialeStateLactoseFree=[
     },
     {
         "id": 2,
-        "recipeTitle": "Aromatic Chicken & Rice Soup with Fried Garlic Oil",
+        "recipeTitle": "Chicken & Rice Soup with Garlic Oil",
         "description": "A comforting and aromatic soup.",
         "mode":'LactoseFree',
         "rating": 4.7,

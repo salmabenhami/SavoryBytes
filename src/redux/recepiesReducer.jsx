@@ -9,28 +9,76 @@ const initialState = {
   lactoseFree: initialStateLactoseFree,
 };
 
+// const recipesSlice = createSlice({
+//   name: 'recipes',
+//   initialState,
+//   reducers: {
+//     addRecipe: (state, action) => {
+//       const { mode, recipe } = action.payload; 
+//       const normalizedMode = mode === 'LactoseFree' ? 'lactoseFree' 
+//                           : mode === 'DietFriendly' ? 'dietFriendly' 
+//                           : 'normal';
+//       state[normalizedMode].push(recipe);
+//       console.log('Recette ajoutée :', recipe);
+//       console.log('État mis à jour :', JSON.parse(JSON.stringify(state)))},
+//     removeRecipe: (state, action) => {
+//       const { mode, id } = action.payload;
+//       const normalizedMode = mode === 'LactoseFree' ? 'lactoseFree' 
+//                           : mode === 'DietFriendly' ? 'dietFriendly' 
+//                           : 'normal'; 
+//       state[normalizedMode] = state[normalizedMode].filter(recipe => recipe.id !== id);
+//     },
+//     updateRecipe: (state, action) => {
+//       const { mode, id, updatedRecipe } = action.payload;
+//       const normalizedMode = mode === 'LactoseFree' ? 'lactoseFree' 
+//                           : mode === 'DietFriendly' ? 'dietFriendly' 
+//                           : 'normal'; 
+//       const recipeIndex = state[normalizedMode].findIndex(recipe => recipe.id === id);
+//       if (recipeIndex !== -1) {
+//         state[normalizedMode][recipeIndex] = { ...state[normalizedMode][recipeIndex], ...updatedRecipe };
+//       }
+//     },
+//   },
+// });
 const recipesSlice = createSlice({
   name: 'recipes',
   initialState,
   reducers: {
-    affichage:(state) => state,
     addRecipe: (state, action) => {
       const { mode, recipe } = action.payload;
-      state[mode.toLowerCase()].push(recipe);
+      const normalizedMode = 
+        mode === 'LactoseFree' ? 'lactoseFree' 
+        : mode === 'DietFriendly' ? 'dietFriendly' 
+        : 'normal';
+      state[normalizedMode].push(recipe);
+      console.log('Recipe added:', recipe);
+      console.log('Updated state:', JSON.parse(JSON.stringify(state)));
     },
     removeRecipe: (state, action) => {
       const { mode, id } = action.payload;
-      state[mode.toLowerCase()] = state[mode.toLowerCase()].filter(recipe => recipe.id !== id);
+      const normalizedMode = 
+        mode === 'LactoseFree' ? 'lactoseFree' 
+        : mode === 'DietFriendly' ? 'dietFriendly' 
+        : 'normal';
+      state[normalizedMode] = state[normalizedMode].filter(recipe => recipe.id !== id);
     },
     updateRecipe: (state, action) => {
       const { mode, id, updatedRecipe } = action.payload;
-      const recipeIndex = state[mode.toLowerCase()].findIndex(recipe => recipe.id === id);
+      const normalizedMode = 
+        mode === 'LactoseFree' ? 'lactoseFree' 
+        : mode === 'DietFriendly' ? 'dietFriendly' 
+        : 'normal';
+      const recipeIndex = state[normalizedMode].findIndex(recipe => recipe.id === id);
       if (recipeIndex !== -1) {
-        state[mode.toLowerCase()][recipeIndex] = { ...state[mode.toLowerCase()][recipeIndex], ...updatedRecipe };
+        state[normalizedMode][recipeIndex] = { 
+          ...state[normalizedMode][recipeIndex], 
+          ...updatedRecipe 
+        };
       }
     },
   },
 });
+
 export const selectCategories = (state) => {
   const categories = new Set();
   Object.values(state.recipes).forEach((recipes) => {
