@@ -1,0 +1,107 @@
+.profile-container {
+  font-family: Arial, sans-serif;
+  background-color: #ca8076; /* Fond rose très clair */
+  margin: 0;
+  padding: 0;
+}
+
+.profile-container h1,
+.profile-container h2 {
+  color: #B55D51; /* Corail foncé */
+}
+
+.profile-container div {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 600px;
+  background-color: #f7f7f7; /* Blanc cassé */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.profile-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #B55D51; /* Corail foncé */
+}
+
+.profile-container input[type="text"],
+.profile-container input[type="email"],
+.profile-container textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #f7f7f7;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.profile-container button[type="submit"] {
+  background-color: #B55D51; /* Corail foncé */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.profile-container button[type="submit"]:hover {
+  background-color: #933A31; /* Corail foncé plus foncé */
+}
+
+.profile-container img {
+  display: block;
+  margin: 20px auto;
+  max-width: 100px; /* Taille réduite */
+  height: 100px; /* Taille réduite */
+  border-radius: 50%; /* Cercle pour l'image */
+  border: 3px solid #B55D51; /* Bordure corail foncé */
+}
+
+.profile-container p {
+  margin: 0 0 10px;
+  color: #333333; /* Noir doux pour le texte */
+}
+
+.profile-container .dropzone {
+  width: 90%;
+  padding: 20px;
+  border: 2px dashed #B55D51; /* Bordure corail foncé */
+  border-radius: 4px;
+  text-align: center;
+  background-color: white; /* Fond blanc cassé */
+  cursor: pointer;
+}
+
+.profile-container .dropzone p {
+  margin: 0;
+  color: #B55D51; /* Texte corail foncé */
+}
+.profile-form-container {
+  background-color: white; /* Fond blanc */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* Aligne le bouton à droite */
+  margin-top: 20px;
+}
+
+button[type="submit"] {
+  background-color: #B55D51; /* Corail foncé */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #933A31; /* Corail foncé plus foncé */
+}

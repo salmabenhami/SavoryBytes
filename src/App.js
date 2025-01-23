@@ -15,7 +15,10 @@ import Main from './components/pages/MainAbout';
 import Categories from './components/Recepies/categ';
 import RecipeDetails from './components/Recepies/recette';
 import ProtectedRoute from './components/Authentification/ProtectedRoute';
-
+import ProfilePage from './components/pages/ProfilePage';
+import Favorites from './components/pages/Favorites';
+import AddRecipeForm from './components/pages/AddRecipeForm';
+import EditRecipe from './components/pages/EditRecipe';
 const App = () => {
   return (
     <div>
@@ -65,6 +68,17 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <RecipeDetails />
+              </ProtectedRoute>
+            }
+          />
+          <Route path='/profil' element={<ProfilePage/>}/>
+          <Route path="/favorites" element={<Favorites />} /> 
+          <Route path="/addRecipe" element={<AddRecipeForm />} /> 
+          <Route
+            path="/edit-recipe/:title"
+            element={
+              <ProtectedRoute>
+                <EditRecipe />
               </ProtectedRoute>
             }
           />

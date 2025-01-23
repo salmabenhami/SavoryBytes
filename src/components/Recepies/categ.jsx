@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { selectFilteredRecipes  } from  '../../redux/recepiesReducer';
 import { Link } from 'react-router-dom';
+import Card from '../pages/Card';
+import "../../styles/CardStyle.css";
 const Categories = () => {
   const { mode, categ } = useParams();
 
@@ -11,19 +13,21 @@ const Categories = () => {
   return (
     <div>
       <h1>Recettes pour {mode} - {categ}</h1>
+      <div  >
       {recipes.length > 0 ? (
-        <ul>
+        <div className="card-container">
           {recipes.map(recipe => (
-            <li key={recipe.id}>
- <Link to={`/recette/${mode}/${categ}/${recipe.recipeTitle.toLowerCase().replace(/ /g, '-')}`}>
-                {recipe.recipeTitle}
+            <div key={recipe.id} className="card-wrapper">
+ <Link to={`/recette/${mode}/${categ}/${recipe.recipeTitle.toLowerCase().replace(/ /g, '-')}`} className="plain-link">
+                <Card recipe={recipe}/>
               </Link>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
         <p>Aucune recette trouvée pour cette catégorie.</p>
       )}
+      </div>
     </div>
   );
 };
