@@ -32,9 +32,9 @@ const Menu=()=>{
             <li className="dropdown">
                 <Link>Modes</Link>
                 <div className="dropdown-content">
-                    <p><NavLink to="/normal" onClick={() => setSelectedMode("normal")}>Normal</NavLink></p>
-                    <p><NavLink to="/diet" onClick={() => setSelectedMode("diet")}>Diet</NavLink></p>
-                    <p><NavLink to="/lactose-free" onClick={() => setSelectedMode("lactose-free")}>Lactose-free</NavLink></p>
+                    <p><NavLink to="/normal" onClick={() => setSelectedMode("normal")} className="dropdown-item">Normal</NavLink></p>
+                    <p><NavLink to="/diet" onClick={() => setSelectedMode("diet")} className="dropdown-item">Diet</NavLink></p>
+                    <p><NavLink to="/lactose-free" onClick={() => setSelectedMode("lactose-free")} className="dropdown-item">Lactose-free</NavLink></p>
                 </div>
             </li>
             <li className="dropdown" onChange={(e)=>handleCateg(e)}>
@@ -56,8 +56,8 @@ const Menu=()=>{
             {role === 'admin' && <li className="dropdown">
                 <Link>Manager</Link>
                 <div className="dropdown-content">
-                    <p><NavLink to="/manage-users" >Manage Users</NavLink></p>
-                    <p><NavLink to="/manage-recepies">Manage Recepies</NavLink></p>
+                    <p><NavLink to="/manage-users" className="dropdown-item">Manage Users</NavLink></p>
+                    <p><NavLink to="/manage-recepies" className="dropdown-item">Manage Recepies</NavLink></p>
                 </div>
             </li>}
 

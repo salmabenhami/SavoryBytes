@@ -31,8 +31,8 @@ export const initialStateNormal = [
         "rating": 4.8,
         "date": "2025-01-11",
         "comments": [
-            {"user": "User1", "comment": "Delicious and juicy!", "rating": 5},
-            {"user": "User2", "comment": "Very tasty!", "rating": 4}
+            {"id":"1","user": "4", "comment": "Delicious and juicy!", "rating": 5},
+            {"id":"2","user": "3", "comment": "Very tasty!", "rating": 4}
         ],
         "ingredients": {
             "ground_beef": "500 g",
@@ -77,8 +77,8 @@ export const initialStateNormal = [
         "rating": 4.2,
         "date": "2025-01-11",
         "comments": [
-            {"user": "User1", "comment": "Creamy and comforting!", "rating": 4},
-            {"user": "User2", "comment": "Needs more cheese.", "rating": 3}
+            {"id":"1","user": "2", "comment": "Creamy and comforting!", "rating": 4},
+            {"id":"2","user": "5", "comment": "Needs more cheese.", "rating": 3}
         ],
         "ingredients": {
             "elbow_macaroni": "300 g",
@@ -121,8 +121,8 @@ export const initialStateNormal = [
         "rating": 4.2,
         "date": "2025-01-11",
         "comments": [
-            {"user": "User1", "comment": "A family favorite!", "rating": 5},
-            {"user": "User2", "comment": "Good but could use more toppings.", "rating": 4}
+            {"id":"1","user": "3", "comment": "A family favorite!", "rating": 5},
+            {"id":"2","user": "5", "comment": "Good but could use more toppings.", "rating": 4}
         ],
         "ingredients": {
             "pizza_dough": "1",
@@ -164,8 +164,8 @@ export const initialStateNormal = [
         "rating": 4.5,
         "date": "2025-01-11",
         "comments": [
-            {"user": "User1", "comment": "Crispy and delicious!", "rating": 5},
-            {"user": "User2", "comment": "Perfectly cooked.", "rating": 4}
+            {"id":"1","user": "2", "comment": "Crispy and delicious!", "rating": 5},
+            {"id":"2","user": "4", "comment": "Perfectly cooked.", "rating": 4}
         ],
         "ingredients": {
             "chicken_pieces": "8",
@@ -209,8 +209,8 @@ export const initialStateNormal = [
     "rating": 4.0,
     "date": "2025-01-11",
     "comments": [
-        {"user": "User1", "comment": "Rich and creamy!", "rating": 5},
-        {"user": "User2", "comment": "Authentic taste.", "rating": 4}
+        {"id":"1","user": "2", "comment": "Rich and creamy!", "rating": 5},
+        {"id":"2","user": "3", "comment": "Authentic taste.", "rating": 4}
     ],
     "ingredients": {
         "spaghetti": "200g",
@@ -255,8 +255,8 @@ export const initialStateNormal = [
         "rating": 4.1,
         "date": "2025-01-11",
         "comments": [
-            {"user": "User1", "comment": "Tender and flavorful!", "rating": 5},
-            {"user": "User2", "comment": "Great smoky flavor.", "rating": 4}
+            {"id":"1","user": "3", "comment": "Tender and flavorful!", "rating": 5},
+            {"id":"2","user": "5", "comment": "Great smoky flavor.", "rating": 4}
         ],
         "ingredients": {
             "ribs": "1 rack",
@@ -300,8 +300,8 @@ export const initialStateNormal = [
         "rating": 4.7,
         "date": "2025-01-11",
         "comments": [
-            {"user": "User1", "comment": "Creamy and delicious!", "rating": 5},
-            {"user": "User2", "comment": "Very tasty.", "rating": 4}
+            {"id":"1","user": "4", "comment": "Creamy and delicious!", "rating": 5},
+            {"id":"2","user": "5", "comment": "Very tasty.", "rating": 4}
         ],
         "ingredients": {
             "chicken_breasts": "2",
@@ -348,8 +348,8 @@ export const initialStateNormal = [
         "rating": 4.8,
         "date": "2025-01-11",
         "comments": [
-            {"user": "User1", "comment": "So good!", "rating": 5},
-            {"user": "User2", "comment": "Perfect for a quick meal.", "rating": 4}
+            {"id":"1","user": "3", "comment": "So good!", "rating": 5},
+            {"id":"1","user": "2", "comment": "Perfect for a quick meal.", "rating": 4}
         ],
         "ingredients": {
             "ground_beef": "500g",
@@ -391,8 +391,8 @@ export const initialStateNormal = [
         "rating": 4.0,
         "date": "2025-01-11",
         "comments": [
-            {"user": "User1", "comment": "Rich and hearty!", "rating": 5},
-            {"user": "User2", "comment": "A bit heavy.", "rating": 3}
+            {"id":"1","user": "3", "comment": "Rich and hearty!", "rating": 5},
+            {"id":"2","user": "4", "comment": "A bit heavy.", "rating": 3}
         ],
         "ingredients": {
             "lasagna_noodles": "12",
@@ -445,8 +445,8 @@ export const initialStateNormal = [
     "rating": 3.8,
     "date": "2025-01-11",
     "comments": [
-        {"user": "User1", "comment": "So tasty!", "rating": 4},
-        {"user": "User2", "comment": "A bit greasy.", "rating": 3}
+        {"id":"1","user": "5", "comment": "So tasty!", "rating": 4},
+        {"id":"2","user": "3", "comment": "A bit greasy.", "rating": 3}
     ],
     "ingredients": {
         "potatoes": "4 large",
@@ -497,8 +497,8 @@ export const initialStateNormal = [
     "rating": 4.5,
     "date": "2025-01-11",
     "comments": [
-        {"user": "User1", "comment": "Rich and aromatic!", "rating": 5},
-        {"user": "User2", "comment": "Great vegetarian option.", "rating": 4}
+        {"id":"1","user": "2", "comment": "Rich and aromatic!", "rating": 5},
+        {"id":"2","user": "4", "comment": "Great vegetarian option.", "rating": 4}
     ],
     "ingredients": {
         "potatoes": "2",
@@ -549,8 +549,8 @@ export const initialStateNormal = [
     "rating": 4.7,
     "date": "2025-01-11",
     "comments": [
-        {"user": "User1", "comment": "Perfectly cooked!", "rating": 5},
-        {"user": "User2", "comment": "Delicious and healthy.", "rating": 4}
+        {"id":"1","user": "4", "comment": "Perfectly cooked!", "rating": 5},
+        {"id":"2","user": "3", "comment": "Delicious and healthy.", "rating": 4}
     ],
     "ingredients": {
         "salmon_fillets": "4",
@@ -593,8 +593,8 @@ export const initialStateNormal = [
     "rating": 4.6,
     "date": "2025-01-11",
     "comments": [
-        {"user": "User1", "comment": "Healthy and tasty!", "rating": 5},
-        {"user": "User2", "comment": "Simple and delicious.", "rating": 4}
+        {"id":"1","user": "3", "comment": "Healthy and tasty!", "rating": 5},
+        {"id":"2","user": "2", "comment": "Simple and delicious.", "rating": 4}
     ],
     "ingredients": {
         "chicken_breasts": "2",
@@ -640,8 +640,8 @@ export const initialStateNormal = [
     "rating": 4.4,
     "date": "2025-01-11",
     "comments": [
-        {"user": "User1", "comment": "Light and healthy!", "rating": 5},
-        {"user": "User2", "comment": "Perfect for lunch.", "rating": 4}
+        {"id":"1","user": "5", "comment": "Light and healthy!", "rating": 5},
+        {"id":"2","user": "4", "comment": "Perfect for lunch.", "rating": 4}
     ],
     "ingredients": {
         "quinoa": "1 cup",
@@ -684,8 +684,8 @@ export const initialStateNormal = [
     "rating": 4.3,
     "date": "2025-01-11",
     "comments": [
-        {"user": "User1", "comment": "Loaded with veggies!", "rating": 5},
-        {"user": "User2", "comment": "Great vegetarian option.", "rating": 4}
+        {"id":"1","user": "4", "comment": "Loaded with veggies!", "rating": 5},
+        {"id":"2","user": "3", "comment": "Great vegetarian option.", "rating": 4}
     ],
     "ingredients": {
         "pizza_dough": "1",
@@ -731,8 +731,8 @@ export const initialStateNormal = [
     "rating": 4.5,
     "date": "2025-01-11",
     "comments": [
-        {"user": "User1", "comment": "Perfect for lunch!", "rating": 5},
-        {"user": "User2", "comment": "Very tasty and healthy.", "rating": 4}
+        {"id":"1","user": "5", "comment": "Perfect for lunch!", "rating": 5},
+        {"id":"2","user": "4", "comment": "Very tasty and healthy.", "rating": 4}
     ],
     "ingredients": {
         "chicken_breasts": "2",
@@ -772,8 +772,8 @@ export const initialStateNormal = [
     "rating": 4.8,
     "date": "2025-01-11",
     "comments": [
-        {"user": "User1", "comment": "Comforting and filling!", "rating": 5},
-        {"user": "User2", "comment": "Perfect for a cold day.", "rating": 4}
+        {"id":"1","user": "4", "comment": "Comforting and filling!", "rating": 5},
+        {"id":"2","user": "3", "comment": "Perfect for a cold day.", "rating": 4}
     ],
     "ingredients": {
         "lentils": "1 cup",
@@ -822,8 +822,8 @@ export const initialStateNormal = [
     "rating": 4.4,
     "date": "2025-01-11",
     "comments": [
-        {"user": "User1", "comment": "A great side dish!", "rating": 5},
-        {"user": "User2", "comment": "Very flavorful.", "rating": 4}
+        {"id":"1","user": "2", "comment": "A great side dish!", "rating": 5},
+        {"id":"2","user": "5", "comment": "Very flavorful.", "rating": 4}
     ],
     "ingredients": {
         "bell_peppers": "2",
@@ -911,8 +911,8 @@ export const initialStateNormal = [
     "rating": 4.8,
     "date": "2025-01-11",
     "comments": [
-        {"user": "User1", "comment": "Perfectly sweet and tart!", "rating": 5},
-        {"user": "User2", "comment": "A family favorite.", "rating": 4}
+        {"id":"1","user": "4", "comment": "Perfectly sweet and tart!", "rating": 5},
+        {"id":"2","user": "2", "comment": "A family favorite.", "rating": 4}
     ],
     "ingredients": {
         "pie_crusts": "2",
@@ -959,8 +959,8 @@ export const initialStateNormal = [
     "rating": 4.5,
     "date": "2025-01-11",
     "comments": [
-        {"user": "User1", "comment": "Light and delicious!", "rating": 5},
-        {"user": "User2", "comment": "Perfect summer dessert.", "rating": 4}
+        {"id":"1","user": "4", "comment": "Light and delicious!", "rating": 5},
+        {"id":"2","user": "5", "comment": "Perfect summer dessert.", "rating": 4}
     ],
     "ingredients": {
         "greek_yogurt": "2 cups",

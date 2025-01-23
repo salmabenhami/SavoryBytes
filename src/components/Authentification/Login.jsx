@@ -51,7 +51,7 @@ const Login = () => {
       <p className="encouragement">Welcome back! Log in to continue enjoying delicious meals and fun recipes!</p>
       <div className="form-body">
         <div className="img">
-          <img src={img} alt="Login" />
+          <img src={img} alt="Login"/>
         </div>
         <div className="form">
           <h2>Log in</h2>

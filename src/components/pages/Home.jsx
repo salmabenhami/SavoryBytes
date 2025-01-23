@@ -18,11 +18,11 @@ const Home = () => {
     <div>
       {top10Recipes.length > 0 ? (
         <div className="card-container">
-          {top10Recipes.map((recipe) => {
+          {top10Recipes.map(((recipe), idx) => {
             const mode = recipe.mode;
             const categ = recipe.category;
             return (
-              <div  className="card-wrapper">
+              <li key={recipe.id}>
                 <Link
                 key={recipe.id}
                 to={`/recette/${mode}/${categ}/${encodeURIComponent(

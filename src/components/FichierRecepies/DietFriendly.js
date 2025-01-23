@@ -9,8 +9,8 @@ export const initialStateDietFriendly=[
         "rating": 4.5,
         "date": "2025-01-14",
         "comments": [
-            {"user": "User1", "comment": "Delicious and spicy!", "rating": 5},
-            {"user": "User2", "comment": "Loved the flavors.", "rating": 4}
+            {"id":"1","user": "5", "comment": "Delicious and spicy!", "rating": 5},
+            {"id":"2","user": "4", "comment": "Loved the flavors.", "rating": 4}
         ],
         "ingredients": {
             "noodles": "200g",
