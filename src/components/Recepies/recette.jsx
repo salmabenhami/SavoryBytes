@@ -153,9 +153,11 @@ const RecipeDetails = () => {
         <div style={{ color: '#B55D51' }}>
           <FontAwesomeIcon icon={faComments} /> <span> {recipe.comments?.length || 0} comments</span>
         </div>
-        <div style={{ color: '#B55D51', cursor: 'pointer' }} onClick={handleAddToFavorites}>
-          <FontAwesomeIcon icon={faHeart} /> <span>Save</span>
-        </div>
+       {!isAdmin&&(
+          <div style={{ color: '#B55D51', cursor: 'pointer' }} onClick={handleAddToFavorites}>
+            <FontAwesomeIcon icon={faHeart} /> <span>Save</span>
+          </div>
+       )}
         
         <div style={{ color: '#B55D51' }}>
           <b>{recipe.rating}</b>
@@ -207,7 +209,7 @@ const RecipeDetails = () => {
         </ul>
       </div>
       {/* -------------------------------------------------------------imane's traitement--------------------------------------------------- */}
-      {isAdmin && (
+      {isAdmin &&  (
         <div style={{ margin: '20px', display: 'flex', gap: '10px' }}>
           <button
             onClick={handleEditRecipe}
