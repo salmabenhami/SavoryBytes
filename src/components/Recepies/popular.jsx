@@ -1,14 +1,14 @@
 import React from 'react';
-import data1 from './normalRecipies';
-import data2 from './LactoseFree';
-import data3 from './DietFriendly';
-import maincourse from '../categimage/maincourse.jpg';
-import app from '../categimage/app.jpg';
-import dessert from '../categimage/dessert.jpg';
-import soup from '../categimage/soupe.jpg';
-import salad from '../categimage/salade.jpg';
-import snack from '../categimage/snack.jpg';
-import carrot from '../categimage/R.jpg';
+import data1 from '../FichierRecepies/normalVf';
+import data2 from '../FichierRecepies/LactoseFreevf';
+import data3 from '../FichierRecepies/DietFriendly';
+import maincourse from '../images/categimage/maincourse.jpg';
+import app from '../images/categimage/app.jpg';
+import dessert from '../images/categimage/dessert.jpg';
+import soup from '../images/categimage/soupe.jpg';
+import salad from '../images/categimage/salade.jpg';
+import snack from '../images/categimage/snack.jpg';
+import carrot from '../images/categimage/R.jpg';
 
 function Popularcat() {
     const allData = [...data1, ...data2, ...data3];
