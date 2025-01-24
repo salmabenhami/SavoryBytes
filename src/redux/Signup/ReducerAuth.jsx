@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-
+import user1 from '../../components/images/UserImages/user1.jpg';
+import user2 from '../../components/images/UserImages/user2.jpg';
+import user3 from '../../components/images/UserImages/user3.jpg';
 const initialState = {
   isAuthenticated: false,
   currentUser: null,
@@ -11,7 +13,7 @@ const initialState = {
       email: "alice@example.com",
       password: '1234',
       role: "admin",
-      profilePicture: "",
+      profilePicture: user1 ,
       bio: "i'm the admin",
       joinedDate: "2023-01-10",
     },
@@ -21,7 +23,7 @@ const initialState = {
       email: "bob@example.com",
       password: '1234',
       role: "user",
-      profilePicture: "",
+      profilePicture: user2,
       bio: '',
       joinedDate: "2024-01-10",
     },
@@ -31,30 +33,11 @@ const initialState = {
       email: "foodlover123@example.com",
       password: '1234',
       role: "user",
-      profilePicture: '',
+      profilePicture: user3,
       bio: "Passionate about discovering new flavors and recipes.",
       joinedDate: "2024-01-10",
     },
-    {
-      id: 4,
-      username: "CulinaryExplorer",
-      email: "culinaryexplorer@example.com",
-      password: '1234',
-      role: "user",
-      profilePicture: '',
-      bio: "Exploring the world one dish at a time.",
-      joinedDate: "2023-08-22",
-    },
-    {
-      id: 5,
-      username: "HealthyEater",
-      email: "healthyeater@example.com",
-      password: '1234',
-      role: "user",
-      profilePicture: '',
-      bio: "Dedicated to healthy and delicious cooking.",
-      joinedDate: "2024-03-17",
-    },
+    
   ],
   error: null,
   loading: false,
