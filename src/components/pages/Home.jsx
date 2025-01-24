@@ -14,7 +14,7 @@ const Home = () => {
     .slice(0, 12);
 
   return (
-    <div>
+    <div className="center-container">
       {top10Recipes.length > 0 ? (
         <div className="card-container">
           {top10Recipes.map((recipe) => {

@@ -12,7 +12,7 @@ const initialState = {
       password: '1234',
       role: "admin",
       profilePicture: "",
-      bio: '',
+      bio: "i'm the admin",
       joinedDate: "2023-01-10",
     },
     {
@@ -71,9 +71,15 @@ const authSlice = createSlice({
     signupFailure(state, action) {
       state.error = action.payload;
     },
+  
     loginSuccess(state, action) {
-      state.isAuthenticated = true;
-      state.currentUser = action.payload;
+      const user = state.users.find((u) => u.id === action.payload.id);
+      if (user) {
+        state.isAuthenticated = true;
+        state.currentUser = user;
+      } else {
+        state.error = "User not found";
+      }
     },
     loginFailure(state, action) {
       state.error = action.payload;
@@ -101,6 +107,7 @@ const authSlice = createSlice({
         user.role = role;
       }
     },
+    
     searchuser(state, action){
       return{
         ...state,
@@ -137,7 +144,22 @@ const authSlice = createSlice({
       }
       return state;
     },
+    setProfile(state, action) {
+      const { id, ...updatedData } = action.payload;
+
+      // Update the currentUser if it matches the ID
+      if (state.currentUser && state.currentUser.id === id) {
+        state.currentUser = { ...state.currentUser, ...updatedData };
+      }
+
+      // Update the user in the users array if needed
+      const userIndex = state.users.findIndex((user) => user.id === id);
+      if (userIndex !== -1) {
+        state.users[userIndex] = { ...state.users[userIndex], ...updatedData };
+      }
+    },
   },
+ 
 });
 
 export const {
@@ -152,6 +174,7 @@ export const {
   sortdate,
   searchuser,
   sortrole,
+  setProfile
 } = authSlice.actions;
 
 export default authSlice.reducer;

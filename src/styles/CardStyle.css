@@ -5,8 +5,12 @@
     gap: 16px;
     width: 100%;
     justify-content: center;
+    
 
    
+  }
+  .center-container{
+    margin-left: 5%;
   }
   .plain-link {
     text-decoration: none; 
@@ -75,6 +79,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 2%;
   }
   
   .card-date-comments div {
@@ -108,4 +113,58 @@
     width: 100%;
     margin-top: 10px;
   }
-  
+@media (max-width: 619px) {
+    .card-container {
+        gap: 8px;
+        justify-content: center;
+    }
+
+    .card-wrapper {
+        flex: 0 0 auto;
+        max-width: 250px;
+    }
+
+    .card {
+        width: 250px;
+        margin-bottom: 8px;
+    }
+
+    .card img {
+        height: 150px;
+    }
+
+    .card-title {
+        font-size: 16px;
+    }
+
+    .card-date-comments p {
+        font-size: 12px;
+    }
+}
+
+
+@media (min-width: 620px) and (max-width: 899px) {
+    .card-container {
+        gap: 16px;
+        justify-content: flex-start;
+    }
+
+    .card-wrapper {
+        flex: 1 1 calc(50% - 16px); 
+        max-width: calc(50% - 16px);
+    }
+}
+
+@media (min-width: 900px) and (max-width: 1199px) {
+    .card-wrapper {
+        flex: 1 1 calc(33.33% - 16px);
+        max-width: calc(33.33% - 16px);
+    }
+}
+
+@media (min-width: 1200px) {
+    .card-wrapper {
+        flex: 1 1 calc(25% - 16px); 
+        max-width: calc(25% - 16px);
+    }
+}

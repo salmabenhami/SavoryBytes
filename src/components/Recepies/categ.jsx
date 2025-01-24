@@ -13,7 +13,7 @@ const Categories = () => {
   return (
     <div>
       <h1>Recettes pour {mode} - {categ}</h1>
-      <div  >
+      <div className='center-container' >
       {recipes.length > 0 ? (
         <div className="card-container">
           {recipes.map(recipe => (

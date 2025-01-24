@@ -397,6 +397,7 @@
 // export default RecipeDetails;
 
 
+
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -414,7 +415,7 @@ const RecipeDetails = () => {
   const recipes = useSelector(state => [
     ...state.recipes.normal,
     ...state.recipes.lactoseFree,
-    ...state.recipes.dietFriendly
+    ...state.recipes.dietFriendly,
   ]);
 
   const recipe = recipes.find(
@@ -426,7 +427,7 @@ const RecipeDetails = () => {
   const handleCheckboxChange = (ingredient) => {
     setCheckedIngredients(prevState => ({
       ...prevState,
-      [ingredient]: !prevState[ingredient]
+      [ingredient]: !prevState[ingredient],
     }));
   };
 
@@ -467,6 +468,49 @@ const RecipeDetails = () => {
     }
     return stars;
   };
+  const renderIngredients = () => {
+    if (Array.isArray(recipe.ingredients)) {
+      
+      return recipe.ingredients.map((ingredient, index) => (
+        <li key={index}>
+          <label
+            style={{
+              textDecoration: checkedIngredients[ingredient.name] ? 'line-through' : 'none',
+              color: checkedIngredients[ingredient.name] ? 'gray' : 'black',
+            }}
+          >
+            <input
+              type="checkbox"
+              checked={checkedIngredients[ingredient.name] || false}
+              onChange={() => handleCheckboxChange(ingredient.name)}
+            />
+            <span>{ingredient.value}</span> {ingredient.name}
+          </label>
+        </li>
+      ));
+    } else if (typeof recipe.ingredients === 'object') {
+     
+      return Object.entries(recipe.ingredients || {}).map(([ingredient, quantity], index) => (
+        <li key={index}>
+          <label
+            style={{
+              textDecoration: checkedIngredients[ingredient] ? 'line-through' : 'none',
+              color: checkedIngredients[ingredient] ? 'gray' : 'black',
+            }}
+          >
+            <input
+              type="checkbox"
+              checked={checkedIngredients[ingredient] || false}
+              onChange={() => handleCheckboxChange(ingredient)}
+            />
+            <span>{quantity}</span> {ingredient}
+          </label>
+        </li>
+      ));
+    } else {
+      return <li>No ingredients found.</li>;
+    }
+  };
 
   return (
     <div>
@@ -487,19 +531,21 @@ const RecipeDetails = () => {
         <h1 style={{ marginLeft: '40px' }}>{recipe.description}</h1>
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-around', width: '60%', marginLeft: '0px' }}>
-        <div style={{ color: "#B55D51" }}>
-          <FontAwesomeIcon icon={faUser} /><span> {recipe.author}</span>
+        <div style={{ color: '#B55D51' }}>
+          <FontAwesomeIcon icon={faUser} />
+          <span> {recipe.author}</span>
         </div>
-        <div style={{ color: "#B55D51" }}>
-          <FontAwesomeIcon icon={faCalendarAlt} /><span> {recipe.date}</span>
+        <div style={{ color: '#B55D51' }}>
+          <FontAwesomeIcon icon={faCalendarAlt} />
+          <span> {recipe.date}</span>
         </div>
-        <div style={{ color: "#B55D51" }}>
-          <FontAwesomeIcon icon={faComments} /> <span> {recipe.comments.length} comments</span>
+        <div style={{ color: '#B55D51' }}>
+          <FontAwesomeIcon icon={faComments} /> <span> {recipe.comments?.length || 0} comments</span>
         </div>
-        <div style={{ color: "#B55D51", cursor: 'pointer' }} onClick={handleAddToFavorites}>
+        <div style={{ color: '#B55D51', cursor: 'pointer' }} onClick={handleAddToFavorites}>
           <FontAwesomeIcon icon={faHeart} /> <span>Save</span>
         </div>
-        <div style={{ color: "#B55D51" }}>
+        <div style={{ color: '#B55D51' }}>
           <b>{recipe.rating}</b>
           {renderStars(recipe.rating)}
         </div>
@@ -512,7 +558,7 @@ const RecipeDetails = () => {
               width: '100%',
               height: '700px',
               objectFit: 'contain',
-              borderRadius: '10px'
+              borderRadius: '10px',
             }}
             alt={recipe.recipeTitle}
           />
@@ -534,29 +580,18 @@ const RecipeDetails = () => {
         </div>
       </div>
       <div>
-        <h2>Nutrition Facts</h2>
+      <h2>Nutrition Facts</h2>
         <ul>
-          <li>Calories: {recipe.nutritionFacts.calories}</li>
-          <li>Protein: {recipe.nutritionFacts.protein}</li>
-          <li>Carbohydrates: {recipe.nutritionFacts.carbohydrates}</li>
-          <li>Fat: {recipe.nutritionFacts.fat}</li>
-        </ul>
+          <li>Calories: {recipe.nutritionFacts?.calories || 'N/A'}</li>
+          <li>Protein: {recipe.nutritionFacts?.protein || 'N/A'}</li>
+          <li>Carbohydrates: {recipe.nutritionFacts?.carbohydrates || 'N/A'}</li>
+          <li>Fat: {recipe.nutritionFacts?.fat || 'N/A'}</li>
+          </ul>
       </div>
       <div>
         <h2>Ingredients</h2>
         <ul>
-          {Object.entries(recipe.ingredients).map(([ingredient, quantity]) => (
-            <li key={ingredient}>
-              <label style={{ textDecoration: checkedIngredients[ingredient] ? 'line-through' : 'none', color: checkedIngredients[ingredient] ? 'gray' : 'black' }}>
-                <input
-                  type="checkbox"
-                  checked={checkedIngredients[ingredient] || false}
-                  onChange={() => handleCheckboxChange(ingredient)}
-                />
-                <span>{quantity}</span> {ingredient}
-              </label>
-            </li>
-          ))}
+          {renderIngredients()}
         </ul>
       </div>
       {isAdmin && (

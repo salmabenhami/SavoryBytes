@@ -12,6 +12,7 @@ const Mode = () => {
   return (
     <div>
       <h1>Recettes pour {mode.toUpperCase()}</h1>
+      <div className='center-container'> 
       {recipes && recipes.length > 0 ? (
        <div className="card-container">
           {recipes.map(recipe => {
@@ -35,6 +36,7 @@ const Mode = () => {
       ) : (
         <p>Aucune recette trouvée pour cette catégorie.</p>
       )}
+      </div>
     </div>
   );
 };
