@@ -54,16 +54,18 @@
 
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeFromFavorites } from '../../redux/reducerUser'; // Import the action
-import Card from './Card'; // Import the Card component
+import { removeFromFavorites } from '../../redux/Signup/ReducerAuth';
+import Card from './Card';
 
 const Favorites = () => {
   const dispatch = useDispatch();
-  const favorites = useSelector((state) => state.users.currentUser?.favorites || []);
+  const currentUser = useSelector((state) => state.auth.currentUser); 
+  const favorites = currentUser?.favorites || []; 
 
-  // Function to handle removing a recipe from favorites
   const handleRemoveFavorite = (recipeTitle) => {
-    dispatch(removeFromFavorites({ userId: 1, recipeTitle })); // Dispatch the action
+    if (currentUser) {
+      dispatch(removeFromFavorites({ userId: currentUser.id, recipeTitle })); 
+    }
   };
 
   return (
@@ -86,7 +88,7 @@ const Favorites = () => {
                     color: 'white',
                     border: 'none',
                     padding: '8px 16px',
-                    marginTop:'5%',
+                    marginTop: '5%',
                     borderRadius: '5px',
                     cursor: 'pointer',
                   }}
