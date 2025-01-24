@@ -71,9 +71,9 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-          <Route path='/profil' element={<ProfilePage/>}/>
-          <Route path="/favorites" element={<Favorites />} /> 
-          <Route path="/addRecipe" element={<AddRecipeForm />} /> 
+          <Route path='/profil' element={<ProtectedRoute><ProfilePage/></ProtectedRoute>}/>
+          <Route path="/favorites" element={<ProtectedRoute><Favorites /></ProtectedRoute>} /> 
+          <Route path="/addRecipe" element={<ProtectedRoute><AddRecipeForm /></ProtectedRoute>} /> 
           <Route
             path="/edit-recipe/:title"
             element={

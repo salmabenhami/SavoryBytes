@@ -90,8 +90,7 @@ const ProfilePage = () => {
           <p className="profile-text">Bio: {profileState.bio || 'N/A'}</p>
         </div>
 
-        {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
-        {successMessage && <div className="alert alert-success">{successMessage}</div>}
+       
 
         <form className="profile-form" onSubmit={handleSubmit}>
           <div>
@@ -142,6 +141,8 @@ const ProfilePage = () => {
             </button>
           </div>
         </form>
+        {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
+        {successMessage && <div className="alert alert-success">{successMessage}</div>}
       </div>
     </div>
   );
