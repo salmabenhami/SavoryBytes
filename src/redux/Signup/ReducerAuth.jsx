@@ -147,7 +147,6 @@ const authSlice = createSlice({
       const userIndex = state.users.findIndex((user) => user.id === userId);
     
       if (userIndex !== -1) {
-        
         if (!state.users[userIndex].favorites) {
           state.users[userIndex].favorites = [];
         }
@@ -162,7 +161,6 @@ const authSlice = createSlice({
       }
     
       if (state.currentUser && state.currentUser.id === userId) {
-       
         if (!state.currentUser.favorites) {
           state.currentUser.favorites = [];
         }
