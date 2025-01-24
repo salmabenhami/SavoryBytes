@@ -1,29 +1,26 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { selectCategories } from "../../redux/recepiesReducer";
 
 const Menu=()=>{
-    const [selectedMode, setSelectedMode] = useState()
+    const [selectedMode, setSelectedMode] = useState('normal')
     const navigate = useNavigate()
     const {name, role} = useSelector((state)=>state.auth.currentUser || {})
-
+    const categories = useSelector(state => selectCategories(state, selectedMode));
     
 
-    const handleCateg =(mode, category)=>{
-        const value = category.toLowerCase().replace(" ", "-")
-        navigate(`/${mode}/${value}`)
-    }
-    console.log(name, role)
+    const handleCateg = (mode, category) => {
+        if (!category) {
+            console.error("Category is undefined or invalid.");
+            return; 
+        }
+    
+        const value = category.toLowerCase().replace(" ", "-");
+        navigate(`/${mode}/${value}`);
+        console.log("val", value);
+    };
 
-    const categories = [
-        "Main Course",
-        "Appetizer",
-        "Side Dish",
-        "Soup",
-        "Salad",
-        "Dessert",
-        "Snack",
-      ];
     return(<nav>
         <ul>
             {role === 'admin' && <li><NavLink to="/dashboard" className="a">DashBoard</NavLink></li>}
@@ -37,11 +34,11 @@ const Menu=()=>{
                     <p><NavLink to="/lactose-free" onClick={() => setSelectedMode("lactose-free")} className="dropdown-item">Lactose-free</NavLink></p>
                 </div>
             </li>
-            <li className="dropdown" onChange={(e)=>handleCateg(e)}>
+            <li className="dropdown" onClick={(e)=>handleCateg(e)}>
                 <Link className="dropdown-link">categories</Link>
                 <div class="dropdown-content">
                     {categories.map((category) => (
-                        <p
+                        <p  class="dropdown-item "
                             key={category}
                             onClick={() => handleCateg(selectedMode, category)}
                             className="dropdown-item"
