@@ -54,7 +54,7 @@ const Menu=()=>{
                 <Link>Manager</Link>
                 <div className="dropdown-content">
                     <p><NavLink to="/manage-users" className="dropdown-item">Manage Users</NavLink></p>
-                    <p><NavLink to="/addRecipe" className="dropdown-item">Add Recepies</NavLink></p>
+                    <p><NavLink to="/addRecipe" className="dropdown-item">Add Recepie</NavLink></p>
                 </div>
             </li>}
 
