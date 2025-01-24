@@ -16,7 +16,7 @@ const Categories = () => {
       <ul>
         {recipes.map(recipe => (
           <li key={recipe.id}>
-<Link to={`/recette/${mode}/${categ}/${recipe.recipeTitle.toLowerCase().replace(/ /g, '-')}`}>
+            <Link to={`/recette/${mode}/${categ}/${recipe.recipeTitle.toLowerCase().replace(/ /g, '-')}`}>
               {recipe.recipeTitle}
             </Link>
           </li>

@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-
+import user1 from '../../components/images/UserImages/user1.jpg';
+import user2 from '../../components/images/UserImages/user2.jpg';
+import user3 from '../../components/images/UserImages/user3.jpg';
 const initialState = {
   isAuthenticated: false,
   currentUser: null,
@@ -11,9 +13,10 @@ const initialState = {
       email: "alice@example.com",
       password: '1234',
       role: "admin",
-      profilePicture: "",
+      profilePicture: user1 ,
       bio: "i'm the admin",
       joinedDate: "2023-01-10",
+     
     },
     {
       id: 2,
@@ -21,9 +24,10 @@ const initialState = {
       email: "bob@example.com",
       password: '1234',
       role: "user",
-      profilePicture: "",
+      profilePicture: user2,
       bio: '',
       joinedDate: "2024-01-10",
+      favorites: [],
     },
     {
       id: 3,
@@ -31,30 +35,12 @@ const initialState = {
       email: "foodlover123@example.com",
       password: '1234',
       role: "user",
-      profilePicture: '',
+      profilePicture: user3,
       bio: "Passionate about discovering new flavors and recipes.",
       joinedDate: "2024-01-10",
+      favorites: [],
     },
-    {
-      id: 4,
-      username: "CulinaryExplorer",
-      email: "culinaryexplorer@example.com",
-      password: '1234',
-      role: "user",
-      profilePicture: '',
-      bio: "Exploring the world one dish at a time.",
-      joinedDate: "2023-08-22",
-    },
-    {
-      id: 5,
-      username: "HealthyEater",
-      email: "healthyeater@example.com",
-      password: '1234',
-      role: "user",
-      profilePicture: '',
-      bio: "Dedicated to healthy and delicious cooking.",
-      joinedDate: "2024-03-17",
-    },
+    
   ],
   error: null,
   loading: false,
@@ -147,19 +133,64 @@ const authSlice = createSlice({
     setProfile(state, action) {
       const { id, ...updatedData } = action.payload;
 
-      // Update the currentUser if it matches the ID
       if (state.currentUser && state.currentUser.id === id) {
         state.currentUser = { ...state.currentUser, ...updatedData };
       }
 
-      // Update the user in the users array if needed
       const userIndex = state.users.findIndex((user) => user.id === id);
       if (userIndex !== -1) {
         state.users[userIndex] = { ...state.users[userIndex], ...updatedData };
       }
     },
-  },
- 
+    addToFavorites: (state, action) => {
+      const { userId, recipe } = action.payload;
+      const userIndex = state.users.findIndex((user) => user.id === userId);
+    
+      if (userIndex !== -1) {
+        if (!state.users[userIndex].favorites) {
+          state.users[userIndex].favorites = [];
+        }
+    
+        const isAlreadyFavorite = state.users[userIndex].favorites.some(
+          (fav) => fav.recipeTitle === recipe.recipeTitle
+        );
+    
+        if (!isAlreadyFavorite) {
+          state.users[userIndex].favorites.push(recipe);
+        }
+      }
+    
+      if (state.currentUser && state.currentUser.id === userId) {
+        if (!state.currentUser.favorites) {
+          state.currentUser.favorites = [];
+        }
+    
+        const isAlreadyFavorite = state.currentUser.favorites.some(
+          (fav) => fav.recipeTitle === recipe.recipeTitle
+        );
+    
+        if (!isAlreadyFavorite) {
+          state.currentUser.favorites.push(recipe);
+        }
+      }
+    },
+    removeFromFavorites: (state, action) => {
+      const { userId, recipeTitle } = action.payload;
+      const userIndex = state.users.findIndex((user) => user.id === userId);
+
+      if (userIndex !== -1) {
+        state.users[userIndex].favorites = state.users[userIndex].favorites.filter(
+          (fav) => fav.recipeTitle !== recipeTitle
+        );
+      }
+
+      if (state.currentUser && state.currentUser.id === userId) {
+        state.currentUser.favorites = state.currentUser.favorites.filter(
+          (fav) => fav.recipeTitle !== recipeTitle
+        );
+      }
+    },
+  }
 });
 
 export const {
@@ -174,7 +205,10 @@ export const {
   sortdate,
   searchuser,
   sortrole,
-  setProfile
+  setProfile,
+  addToFavorites,
+  removeFromFavorites,
+
 } = authSlice.actions;
 
 export default authSlice.reducer;

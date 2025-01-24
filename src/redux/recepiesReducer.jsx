@@ -9,37 +9,6 @@ const initialState = {
   lactoseFree: initialStateLactoseFree,
 };
 
-// const recipesSlice = createSlice({
-//   name: 'recipes',
-//   initialState,
-//   reducers: {
-//     addRecipe: (state, action) => {
-//       const { mode, recipe } = action.payload; 
-//       const normalizedMode = mode === 'LactoseFree' ? 'lactoseFree' 
-//                           : mode === 'DietFriendly' ? 'dietFriendly' 
-//                           : 'normal';
-//       state[normalizedMode].push(recipe);
-//       console.log('Recette ajoutée :', recipe);
-//       console.log('État mis à jour :', JSON.parse(JSON.stringify(state)))},
-//     removeRecipe: (state, action) => {
-//       const { mode, id } = action.payload;
-//       const normalizedMode = mode === 'LactoseFree' ? 'lactoseFree' 
-//                           : mode === 'DietFriendly' ? 'dietFriendly' 
-//                           : 'normal'; 
-//       state[normalizedMode] = state[normalizedMode].filter(recipe => recipe.id !== id);
-//     },
-//     updateRecipe: (state, action) => {
-//       const { mode, id, updatedRecipe } = action.payload;
-//       const normalizedMode = mode === 'LactoseFree' ? 'lactoseFree' 
-//                           : mode === 'DietFriendly' ? 'dietFriendly' 
-//                           : 'normal'; 
-//       const recipeIndex = state[normalizedMode].findIndex(recipe => recipe.id === id);
-//       if (recipeIndex !== -1) {
-//         state[normalizedMode][recipeIndex] = { ...state[normalizedMode][recipeIndex], ...updatedRecipe };
-//       }
-//     },
-//   },
-// });
 const recipesSlice = createSlice({
   name: 'recipes',
   initialState,
@@ -128,14 +97,24 @@ const recipesSlice = createSlice({
   },
 });
 
-export const selectCategories = (state) => {
-  const categories = new Set();
-  Object.values(state.recipes).forEach((recipes) => {
-    recipes.forEach((recipe) => {
-      categories.add(recipe.category);
-    });
-  });
-  return Array.from(categories);
+export const selectCategories = (state, mode) => {
+  let categ;
+
+  if (mode === 'normal') {
+    categ = [...new Set(state.recipes.normal.map(recipe => recipe.category))]
+  } else if (mode === 'diet') {
+    categ = [...new Set(state.recipes.dietFriendly.map(recipe => recipe.category))]
+  } else if (mode === 'lactose-free') {
+    categ = [...new Set(state.recipes.lactoseFree.map(recipe => recipe.category))]
+  } else {
+    categ = [...new Set(state.recipes.normal.map(recipe => recipe.category))]
+
+  }
+  if (!categ) {
+    return [];
+  }
+  return categ;
+
 };
 
 export const selectFilteredRecipes = (state, mode, category) => {

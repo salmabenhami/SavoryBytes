@@ -24,17 +24,17 @@ const RecipeHeader = ({ recipe, isSaved, handleAddToFavorites, renderStars }) =>
         </div>
         <div
           style={{
-            color: isSaved ? '#FFFFFF' : '#B55D51', // Couleur du texte et de l'icône
-            border: `1px solid #B55D51`, // Bordure de couleur #B55D51
-            backgroundColor: isSaved ? '#B55D51' : 'transparent', // Fond transparent ou #B55D51
-            padding: '8px 16px', // Espacement interne
-            borderRadius: '5px', // Coins arrondis
-            cursor: 'pointer', // Curseur en forme de main
-            display: 'inline-flex', // Alignement horizontal
-            alignItems: 'center', // Centrage vertical
+            color: isSaved ? '#FFFFFF' : '#B55D51', 
+            border: `1px solid #B55D51`, 
+            backgroundColor: isSaved ? '#B55D51' : 'transparent', 
+            padding: '8px 16px', 
+            borderRadius: '5px', 
+            cursor: 'pointer', 
+            display: 'inline-flex',
+            alignItems: 'center', 
             gap: '8px', 
           }}
-          onClick={handleAddToFavorites} // Gestionnaire de clic
+          onClick={handleAddToFavorites} 
         >
           <FontAwesomeIcon icon={faHeart} />
           <span>{isSaved ? 'Saved' : 'Save'}</span>
