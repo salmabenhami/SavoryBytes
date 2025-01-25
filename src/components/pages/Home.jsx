@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router";
 import Card from "./Card";
 import "../../styles/CardStyle.css";
-import { div } from "framer-motion/client";
 
 const Home = () => {
   const { normal, dietFriendly, lactoseFree } = useSelector((state) => state.recipes);
