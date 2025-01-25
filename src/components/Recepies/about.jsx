@@ -118,7 +118,11 @@ const AboutChef = () => {
           initial={{ opacity: 0, y: 50 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{
+<<<<<<< HEAD
             duration: 1.5, 
+=======
+            duration: 1.5,
+>>>>>>> be5e7a75daeb2864eaab487ab8c3120832685e05
             delay: 1, 
           }}
         >

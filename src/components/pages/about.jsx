@@ -54,7 +54,7 @@ const Text = styled.div`
   padding: 2rem;
   left:15%;
   display: flex;
-  height: 369px;
+  height: 434px;
   flex-direction: column;
   justify-content: space-evenly;
   position: relative;

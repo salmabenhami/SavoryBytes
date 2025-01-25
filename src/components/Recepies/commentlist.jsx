@@ -9,6 +9,10 @@ const CommentList = ({ comments, currentUser, isAdmin, recipeId, onDeleteComment
   const [editingCommentId, setEditingCommentId] = useState(null); 
   const [updatedCommentText, setUpdatedCommentText] = useState(''); 
   const [updatedRating, setUpdatedRating] = useState(0); 
+
+  // Récupérer la liste des utilisateurs depuis le Redux
+  const users = useSelector((state) => state.auth.users);
+
   const recipes = useSelector(state => [
     ...state.recipes.normal,
     ...state.recipes.lactoseFree,
@@ -19,7 +23,11 @@ const CommentList = ({ comments, currentUser, isAdmin, recipeId, onDeleteComment
   const recipe = recipes.find(
     r => r.recipeTitle.toLowerCase().replace(/ /g, '-') === title.toLowerCase()
   );
-  
+
+  const getCommenterPhoto = (userId) => {
+    const user = users.find((user) => user.id === userId);
+    return user?.profilePicture || 'https://th.bing.com/th/id/OIP.GHGGLYe7gDfZUzF_tElxiQHaHa?rs=1&pid=ImgDetMain'; 
+  };
 
   const startEditingComment = (commentId, currentComment, currentRating) => {
     setEditingCommentId(commentId);
@@ -73,18 +81,19 @@ const CommentList = ({ comments, currentUser, isAdmin, recipeId, onDeleteComment
 
   return (
     <div style={styles.container}>
-      <h2 style={{textAlign:'center'}}>Comments</h2>
+      <h2 style={{ textAlign: 'center' }}>Comments</h2>
       {comments && comments.length > 0 ? (
         comments.map((comment) => (
           <div key={comment.id} style={styles.commentItem}>
             <div style={styles.userInfo}>
+             
               <img
-              src={currentUser?.profilePicture || 'https://via.placeholder.com/40'} 
-              alt={currentUser?.username || 'User'}
-              style={styles.userPhoto}
+                src={getCommenterPhoto(comment.user)} 
+                alt={comment.username || 'User'}
+                style={styles.userPhoto}
               />
-            <strong style={styles.username}>{comment.username}</strong>
-          </div>
+              <strong style={styles.username}>{comment.username}</strong>
+            </div>
             {editingCommentId === comment.id ? (
               <div>
                 <div style={styles.editContainer}>
@@ -146,7 +155,7 @@ const CommentList = ({ comments, currentUser, isAdmin, recipeId, onDeleteComment
             )}
           </div>
         ))
-      ) :null}
+      ) : null}
       <CommentForm recipeId={recipe.id} />
     </div>
   );
@@ -160,7 +169,7 @@ const styles = {
     margin: '40px',
     padding: '20px',
     backgroundColor: '#f9f9f9',
-    width:'50%'
+    width: '50%',
   },
   commentItem: {
     marginBottom: '20px',
@@ -177,7 +186,7 @@ const styles = {
   userPhoto: {
     width: '40px',
     height: '40px',
-    borderRadius: '50%', 
+    borderRadius: '50%',
     objectFit: 'cover',
   },
   username: {

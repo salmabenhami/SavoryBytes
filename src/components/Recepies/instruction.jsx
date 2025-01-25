@@ -15,48 +15,48 @@ const Instruction = () => {
     );
 
     return (
-        <div style={{marginLeft:'40px'}}>
+        <div style={{ marginLeft: "40px" }}>
             <h2>Instructions</h2>
-            <div style={{ display:'flex',flexDirection:"row", justifyContent:'space-between'}}>
-            <ol>
-                {recipe.preparationSteps.map((instruction, index) => (
-                    <li
-                        key={index}
-                        style={{
-                            marginBottom: "10px",
-                            display: "flex",
-                            alignItems: "center",
-                        }}
-                    >
-                        <div
+            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+                {/* Section des instructions */}
+                <ol>
+                    {recipe.preparationSteps.map((instruction, index) => (
+                        <li
+                            key={index}
                             style={{
+                                marginBottom: "10px",
                                 display: "flex",
-                                justifyContent: "center",
                                 alignItems: "center",
-                                width: "20px",
-                                height: "20px",
-                                border: "2px solid #B55D51",
-                                borderRadius: "4px",
-                                marginRight: "10px",
-                                fontSize: "12px",
-                                fontWeight: "bold",
-                                color: "#fff",
-                                backgroundColor: "#B55D51",
                             }}
                         >
-                            {index + 1}
-                        </div>
-                        <span>{instruction}</span>
-                    </li>
-                ))}
-            </ol>
-            <div>
-            <RelatedRecipes currentRecipe={recipe} />
-            </div>
+                            <div
+                                style={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    width: "20px",
+                                    height: "20px",
+                                    border: "2px solid #B55D51",
+                                    borderRadius: "4px",
+                                    marginRight: "10px",
+                                    fontSize: "12px",
+                                    fontWeight: "bold",
+                                    color: "#fff",
+                                    backgroundColor: "#B55D51",
+                                }}
+                            >
+                                {index + 1}
+                            </div>
+                            <span>{instruction}</span>
+                        </li>
+                    ))}
+                </ol>
 
+                {/* Section des recettes associées */}
+                <div style={{ marginLeft: "20px", marginTop: "-50px" }}>
+                    <RelatedRecipes currentRecipe={recipe} />
+                </div>
             </div>
-            
-            
         </div>
     );
 };

@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { getRecipesByMode } from '../../redux/recepiesReducer';
 import Card from './Card';
 import "../../styles/CardStyle.css"
+import Chemin from '../Recepies/chemin';
 
 const Mode = () => {
   const { mode } = useParams();
@@ -11,7 +12,7 @@ const Mode = () => {
 
   return (
     <div>
-      <h1 className='title'>Mode {mode.charAt(0).toUpperCase() + mode.slice(1).toLowerCase()}</h1>
+      <Chemin/>
       <div className='center-container'> 
       {recipes && recipes.length > 0 ? (
        <div className="card-container">

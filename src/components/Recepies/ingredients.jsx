@@ -26,7 +26,7 @@ const Ingredients=()=>{
           backgroundColor: "#f9f9f9",          
           color: 'black',
           height: 'auto',
-          width: '60%',
+          width: 'auto',
           textAlign: 'center',
           borderRadius: "5px",
           padding: '5px',

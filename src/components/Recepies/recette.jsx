@@ -159,7 +159,6 @@ const handleEditRecipe = () => {
                     marginLeft: '30px',
                     marginTop: '10px',
                     width: '100%', 
-                    maxWidth: '100%', 
                     height: 'auto', 
                     maxHeight: '500px', 
                     objectFit: 'cover', 
