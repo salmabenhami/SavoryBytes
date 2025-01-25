@@ -74,9 +74,8 @@ export default Calcul;
 const styles = {
     container: {
         maxWidth: '780px',
-        margin: '20px 0 0 40px',
         padding: '20px',
-    },
+        marginLeft:'40px'    },
     title: {
         fontSize: '24px',
         color: '#333',
@@ -85,7 +84,7 @@ const styles = {
     },
     servingContainer: {
         display: 'flex',
-        justifyContent: 'space-between', // Aligns the label and buttons to opposite sides
+        justifyContent: 'space-between', 
         alignItems: 'center',
         marginBottom: '20px',
         

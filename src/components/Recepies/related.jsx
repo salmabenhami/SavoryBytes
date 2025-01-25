@@ -14,10 +14,10 @@ function RelatedRecipes({ currentRecipe }) {
   );
 
   const sortedRelatedRecipes = [...relatedRecipes].sort((a, b) => b.rating - a.rating);
-  const topRelatedRecipes = sortedRelatedRecipes.slice(0, 5);
+  const topRelatedRecipes = sortedRelatedRecipes.slice(0, 3);
 
   return (
-    <div style={{ width: "80%", marginRight:'100px' }}>
+    <div style={{marginRight:'200px'}}>
       <h2>Related recipes</h2>
       <div>
         {topRelatedRecipes.map((item) => (
@@ -28,7 +28,6 @@ function RelatedRecipes({ currentRecipe }) {
             )}`}
             style={{
               display: "block",
-              margin: "20px 0",
               textDecoration: "none",
               color: "#000",
             }}
