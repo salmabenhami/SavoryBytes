@@ -17,6 +17,7 @@ import CommentForm from './commentaire';
 import {  deleteComment, updateComment } from '../../redux/recepiesReducer';
 import CommentList from './commentlist'; 
 import Calcul from './calcul'
+import RelatedRecipes from './related';
 
 const RecipeDetails = () => {
   const { title } = useParams();
@@ -139,16 +140,17 @@ const handleEditRecipe = () => {
                 <div style={{display:'flex',flexDirection:'column'}}>
                   <NutritionFacts/>
                   <Ingredients/>
+                  
                 </div>
                 
 
               </div>
         </div>
       </div>
+      
       <PreparationTime/>
       <Instruction/>
       <Calcul/>
-
       <CommentList
         comments={commentsWithUsernames}
         currentUser={currentUser}

@@ -29,7 +29,7 @@ const Calcul = () => {
     return (
         <div style={styles.container}>
             <div style={styles.servingContainer}>
-                <div style={styles.servingLabel}>Serving</div>
+                <h2>Serving</h2>
                 <div style={styles.servingControls}>
                     <button
                         style={styles.button}
@@ -90,11 +90,7 @@ const styles = {
         marginBottom: '20px',
         
     },
-    servingLabel: {
-        fontSize: '18px',
-        color: '#333',
-        fontWeight:'bold'
-    },
+ 
     servingControls: {
         display: 'flex',
         alignItems: 'center',
