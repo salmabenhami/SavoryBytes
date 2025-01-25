@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom'; // Importez Link
+import { Link } from 'react-router-dom'; 
 
 function Latest() {
     const allData = useSelector((state) => [...state.recipes.normal, ...state.recipes.lactoseFree, ...state.recipes.dietFriendly]);
@@ -29,9 +29,9 @@ function Latest() {
                     <Link 
                         to={`/recette/${item.mode}/${item.category}/${encodeURIComponent(
                             item.recipeTitle.toLowerCase().replace(/ /g, '-')
-                          )}`} // Utilisez les bonnes valeurs pour mode, categ, et title
+                          )}`}
                         key={index} 
-                        style={{ textDecoration: 'none', color: 'inherit' }} // Supprime le style par défaut de Link
+                        style={{ textDecoration: 'none', color: 'inherit' }} 
                     >
                         <div style={{ margin: '20px', animation: 'fadeIn 0.5s ease-in-out' }}>
                             <img

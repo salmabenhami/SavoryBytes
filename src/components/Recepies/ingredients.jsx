@@ -25,7 +25,7 @@ const Ingredients=()=>{
           marginLeft: '200px',
           backgroundColor: "#f9f9f9",          
           color: 'black',
-          height: '280px',
+          height: 'auto',
           width: '60%',
           textAlign: 'center',
           borderRadius: "5px",

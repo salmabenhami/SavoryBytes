@@ -73,7 +73,7 @@ const CommentList = ({ comments, currentUser, isAdmin, recipeId, onDeleteComment
 
   return (
     <div style={styles.container}>
-      <h2>Comments</h2>
+      <h2 style={{textAlign:'center'}}>Comments</h2>
       {comments && comments.length > 0 ? (
         comments.map((comment) => (
           <div key={comment.id} style={styles.commentItem}>

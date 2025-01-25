@@ -1,5 +1,6 @@
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
+import RelatedRecipes from "./related";
 
 const Instruction = () => {
     const { title } = useParams();
@@ -16,6 +17,7 @@ const Instruction = () => {
     return (
         <div style={{marginLeft:'40px'}}>
             <h2>Instructions</h2>
+            <div style={{ display:'flex',flexDirection:"row", justifyContent:'space-between'}}>
             <ol>
                 {recipe.preparationSteps.map((instruction, index) => (
                     <li
@@ -48,6 +50,13 @@ const Instruction = () => {
                     </li>
                 ))}
             </ol>
+            <div>
+            <RelatedRecipes currentRecipe={recipe} />
+            </div>
+
+            </div>
+            
+            
         </div>
     );
 };

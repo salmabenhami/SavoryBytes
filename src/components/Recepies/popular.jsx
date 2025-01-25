@@ -9,6 +9,7 @@ import soup from '../images/categimage/soupe.jpg';
 import salad from '../images/categimage/salade.jpg';
 import snack from '../images/categimage/snack.jpg';
 import carrot from '../images/categimage/R.jpg';
+import { Link } from 'react-router-dom';
 
 function Popularcat() {
     const allData = [...data1, ...data2, ...data3];
@@ -26,21 +27,29 @@ function Popularcat() {
     };
 
     return (
-        <div style={{
-            margin:"80px"
-}}>            <h1 style={{fontFamily:'serif',margin:'10px'}} >Popular Categories</h1>
-            <div style={{ display: 'flex',marginTop:"20px", justifyContent: 'space-around', flexWrap: 'wrap' }}>
-                {uniqueCategories.map((category, index) => (
-                    <div key={index} style={{ textAlign: 'center', margin: '30px' }}>
-                        <img 
-                            src={categoryImages[category]} 
-                            alt={category} 
-                            style={{ width: '120px', height: '120px', borderRadius: '50%' }} 
-                        />
-                        <h2 style={{fontFamily:'initial'}}>{category}</h2>
+        <div style={{ margin: "80px" }}>
+            <h1 style={{ fontFamily: 'serif', margin: '10px' }}>Popular Categories</h1>
+            <div style={{ display: 'flex', marginTop: "20px", justifyContent: 'space-around', flexWrap: 'wrap' }}>
+                {uniqueCategories.map((category, index) => {
+                    const categoryRecipes = allData.filter(recipe => recipe.category === category);
 
-                    </div>
-                ))}
+                    return (
+                        <Link 
+                            to={`/${categoryRecipes[0]?.mode}/${encodeURIComponent(category.toLowerCase().replace(/ /g, '-'))}`} 
+                            key={index}
+                            style={{ textDecoration: 'none', color: 'inherit' }}
+                        >
+                            <div style={{ textAlign: 'center', margin: '30px' }}>
+                                <img 
+                                    src={categoryImages[category]} 
+                                    alt={category} 
+                                    style={{ width: '120px', height: '120px', borderRadius: '50%' }} 
+                                />
+                                <h2 style={{ fontFamily: 'initial' }}>{category}</h2>
+                            </div>
+                        </Link>
+                    );
+                })}
             </div>
         </div>
     );
