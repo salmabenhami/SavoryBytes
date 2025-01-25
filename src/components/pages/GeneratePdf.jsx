@@ -134,7 +134,7 @@ const ManuelPDF = () => (
     </Page>
   </Document>
 );
-$
+
 export const generatePDF = async () => {
   const blob = await pdf(<ManuelPDF />).toBlob();
   saveAs(blob, "manuel_savorybytes.pdf");
