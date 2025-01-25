@@ -11,7 +11,7 @@ const Mode = () => {
 
   return (
     <div>
-      <h1>Recettes pour {mode.toUpperCase()}</h1>
+      <h1 className='title'>Mode {mode.charAt(0).toUpperCase() + mode.slice(1).toLowerCase()}</h1>
       <div className='center-container'> 
       {recipes && recipes.length > 0 ? (
        <div className="card-container">

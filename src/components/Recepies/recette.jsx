@@ -137,10 +137,7 @@ const RecipeDetails = () => {
                   </div>
        )}
         
-        <div style={{ color: '#B55D51' }}>
-          <b>{recipe.rating}</b>
-          {renderStars(recipe.rating)}
-        </div>
+        
       </div>
       <div style={{ margin: '0 auto', padding: 0 }}>
         <div style={{ width: '50%', marginLeft: '20px' }}>
