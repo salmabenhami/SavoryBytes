@@ -141,8 +141,23 @@ const ProfilePage = () => {
             </button>
           </div>
         </form>
-        {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
-        {successMessage && <div className="alert alert-success">{successMessage}</div>}
+        {successMessage && (
+          <div className="alert alert-success">
+            <span>{successMessage}</span>
+            <button className="close-btn" onClick={() => setSuccessMessage('')}>
+              &times;
+            </button>
+          </div>
+        )}
+
+        {errorMessage && (
+          <div className="alert alert-danger">
+            <span>{errorMessage}</span>
+            <button className="close-btn" onClick={() => setErrorMessage('')}>
+              &times;
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
