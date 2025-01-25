@@ -3,12 +3,14 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCalendarAlt, faComments, faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
+import { addToFavorites } from '../../redux/Signup/ReducerAuth';
 
 const RecipeHeader = () => {
   const { title } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const currentUser = useSelector((state) => state.auth.currentUser);
+  const isAdmin = currentUser && currentUser.role === 'admin';
 
   const recipes = useSelector((state) => [
     ...state.recipes.normal,
@@ -16,13 +18,12 @@ const RecipeHeader = () => {
     ...state.recipes.dietFriendly,
   ]);
 
-  const users = useSelector((state) => state.auth.users);
   const [isSaved, setIsSaved] = useState(false);
 
   const renderStars = (rating) => {
-    const fullStars = Math.floor(rating); 
+    const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
-    const emptyStars = 5 - Math.ceil(rating); 
+    const emptyStars = 5 - Math.ceil(rating);
 
     const stars = [];
 
@@ -76,6 +77,21 @@ const RecipeHeader = () => {
 
   const commentCount = recipe.comments ? recipe.comments.length : 0;
 
+  const handleAddToFavorites = () => {
+    if (!currentUser) {
+      navigate('/login');
+      return;
+    }
+
+    if (recipe) {
+      dispatch(addToFavorites({
+        userId: currentUser.id,
+        recipe
+      }));
+      setIsSaved(true);
+    }
+  };
+
   return (
     <div>
       <div>
@@ -89,12 +105,28 @@ const RecipeHeader = () => {
           <FontAwesomeIcon icon={faCalendarAlt} /><span> {recipe.date}</span>
         </div>
         <div style={{ color: "#B55D51" }}>
-          <FontAwesomeIcon icon={faComments} /> <span> {commentCount} comments</span>
+          <FontAwesomeIcon icon={faComments} /><span> {commentCount} Comments</span>
         </div>
-        <div style={{ color: "#B55D51", display: 'flex', alignItems: 'center', gap: '5px' }}>
-          <b>{recipe.rating}</b>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
           {renderStars(recipe.rating)}
         </div>
+        {!isAdmin &&  (<div
+          style={{
+            color: isSaved ? '#FFFFFF' : '#B55D51',
+            border: `1px solid #B55D51`,
+            backgroundColor: isSaved ? '#B55D51' : 'transparent',
+            padding: '8px 16px',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+          onClick={handleAddToFavorites}
+        >
+          <FontAwesomeIcon icon={faHeart} />
+          <span>{isSaved ? 'Saved' : 'Save'}</span>
+        </div>)}
       </div>
     </div>
   );

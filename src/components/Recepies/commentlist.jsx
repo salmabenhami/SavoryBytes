@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash, faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faSave, faTimes, faStar } from '@fortawesome/free-solid-svg-icons';
 
 const CommentList = ({ comments, currentUser, isAdmin, recipeId, onDeleteComment, onUpdateComment }) => {
   const [editingCommentId, setEditingCommentId] = useState(null); 
@@ -12,6 +12,7 @@ const CommentList = ({ comments, currentUser, isAdmin, recipeId, onDeleteComment
     setUpdatedCommentText(currentComment);
     setUpdatedRating(currentRating);
   };
+  
   const cancelEditingComment = () => {
     setEditingCommentId(null);
     setUpdatedCommentText('');
@@ -30,6 +31,29 @@ const CommentList = ({ comments, currentUser, isAdmin, recipeId, onDeleteComment
     } else {
       alert('Please enter a valid comment and rating (1-5).');
     }
+  };
+
+  const handleRatingClick = (ratingValue) => {
+    setUpdatedRating(ratingValue);
+  };
+
+  const renderStars = (ratingValue) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <FontAwesomeIcon
+          key={i}
+          icon={faStar}
+          style={{
+            color: i <= ratingValue ? '#B55D51' : '#ccc',
+            fontSize: '1.5em',
+            cursor: 'pointer',
+          }}
+          onClick={() => handleRatingClick(i)}
+        />
+      );
+    }
+    return stars;
   };
 
   return (
@@ -51,19 +75,9 @@ const CommentList = ({ comments, currentUser, isAdmin, recipeId, onDeleteComment
                     }}
                     placeholder="Edit your comment"
                   />
-                  <input
-                    type="number"
-                    value={updatedRating}
-                    onChange={(e) => setUpdatedRating(Number(e.target.value))}
-                    min="1"
-                    max="5"
-                    style={{
-                      borderRadius: '5px',
-                      border: '1px solid #ccc',
-                      width: '60px',
-                    }}
-                    placeholder="Rating (1-5)"
-                  />
+                  <div style={{ display: 'flex', gap: '5px' }}>
+                    {renderStars(updatedRating)}
+                  </div>
                 </div>
                 <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
                   <button
@@ -97,7 +111,9 @@ const CommentList = ({ comments, currentUser, isAdmin, recipeId, onDeleteComment
             ) : (
               <>
                 <p>{comment.comment}</p>
-                <p>Note: {comment.rating}/5</p>
+                <div style={{ display: 'flex', gap: '5px' }}>
+                  {renderStars(comment.rating)}
+                </div>
               </>
             )}
             {currentUser && currentUser.id === Number(comment.user) && (

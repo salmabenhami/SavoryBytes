@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addComment } from '../../redux/recepiesReducer'; 
 import { v4 as uuidv4 } from 'uuid'; 
 import Comments from './commentlist';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 const CommentForm = ({ recipeId }) => {
   const dispatch = useDispatch();
@@ -31,9 +33,32 @@ const CommentForm = ({ recipeId }) => {
     setRating(0);
   };
 
+  const handleRatingClick = (ratingValue) => {
+    setRating(ratingValue);
+  };
+
+  const renderStars = () => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <FontAwesomeIcon
+          key={i}
+          icon={faStar}
+          style={{
+            color: i <= rating ? '#B55D51' : '#ccc',
+            fontSize: '1.5em',
+            cursor: 'pointer',
+          }}
+          onClick={() => handleRatingClick(i)}
+        />
+      );
+    }
+    return stars;
+  };
+
   return (
     <div>
-      <h3>Comments</h3>
+      <h3>Commentaires</h3>
       <form onSubmit={handleSubmit}>
         <textarea
           value={commentText}
@@ -45,26 +70,16 @@ const CommentForm = ({ recipeId }) => {
         />
         <br />
 
-        <label>
-          Note (entre 1 et 5) :
-          <input
-            type="number"
-            value={rating}
-            onChange={(e) => {
-              const value = parseInt(e.target.value, 10);
-              if (value >= 0 && value <= 5) {
-                setRating(value);
-              }
-            }}
-            min="0"
-            max="5"
-            required
-          />
-        </label>
+        <div>
+          <label>Note :</label>
+          <div style={{ display: 'flex', gap: '5px' }}>
+            {renderStars()}
+          </div>
+        </div>
         <br />
-        <button type="submit">Comment</button>
+        <button type="submit">Commenter</button>
       </form>
-      <Comments/>
+      <Comments />
     </div>
   );
 };

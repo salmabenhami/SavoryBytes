@@ -114,32 +114,14 @@ const RecipeDetails = () => {
   return (
     <div>
       <Chemin/>
-      <RecipeHeader/>
+      <RecipeHeader 
+  recipe={recipe}
+  isSaved={isSaved}
+  onAddToFavorites={handleAddToFavorites}
+/>
+
      
-      <div style={{ display: 'flex', justifyContent: 'space-around', width: '60%', marginLeft: '0px' }}>
-       
-       {!isAdmin&&(
-           <div
-                    style={{
-                      color: isSaved ? '#FFFFFF' : '#B55D51',
-                      border: `1px solid #B55D51`,
-                      backgroundColor: isSaved ? '#B55D51' : 'transparent',
-                      padding: '8px 16px',
-                      borderRadius: '5px',
-                      cursor: 'pointer',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                    }}
-                    onClick={handleAddToFavorites}
-                  >
-                    <FontAwesomeIcon icon={faHeart} />
-                    <span>{isSaved ? 'Saved' : 'Save'}</span>
-                  </div>
-       )}
-        
-        
-      </div>
+      
       <div style={{ margin: '0 auto', padding: 0 }}>
         <div style={{ width: '50%', marginLeft: '20px' }}>
           <img
