@@ -75,7 +75,9 @@ const styles = {
     container: {
         maxWidth: '780px',
         padding: '20px',
-        marginLeft:'40px'    },
+        marginLeft:'40px',
+        flexWrap: "wrap"   
+     },
     title: {
         fontSize: '24px',
         color: '#333',

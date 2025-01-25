@@ -42,7 +42,7 @@ const RecipeHeader = () => {
         <div key="half-star" style={{ position: 'relative', display: 'inline-block' }}>
           <FontAwesomeIcon
             icon={faStar}
-            style={{ color: '#ccc', fontSize: '1.2em' }} 
+            style={{ color: '#ccc', fontSize: '1.2em' }}
           />
           <div style={{ position: 'absolute', top: 0, left: 0, width: '50%', overflow: 'hidden' }}>
             <FontAwesomeIcon
@@ -59,7 +59,7 @@ const RecipeHeader = () => {
         <FontAwesomeIcon
           key={`empty-${i}`}
           icon={faStar}
-          style={{ color: '#ccc', fontSize: '1.2em' }} 
+          style={{ color: '#ccc', fontSize: '1.2em' }}
         />
       );
     }
@@ -93,40 +93,56 @@ const RecipeHeader = () => {
   };
 
   return (
-    <div>
+    <div style={{ padding: '20px', maxWidth: '1200px' }}>
       <div>
-        <h1 style={{ marginLeft: '40px' }}>{recipe.description}</h1>
+        <h1 style={{ marginLeft: '20px', fontSize: '2em' }}>
+          {recipe.description}
+        </h1>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'space-around', width: '60%', marginLeft: '0px' }}>
-        <div style={{ color: "#B55D51" }}>
-          <FontAwesomeIcon icon={faUser} /><span> {recipe.author}</span>
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '20px', 
+          marginTop: '20px',
+          padding: '0 20px',
+        }}
+      >
+        <div style={{ color: '#B55D51', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <FontAwesomeIcon icon={faUser} />
+          <span>{recipe.author}</span>
         </div>
-        <div style={{ color: "#B55D51" }}>
-          <FontAwesomeIcon icon={faCalendarAlt} /><span> {recipe.date}</span>
+        <div style={{ color: '#B55D51', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <FontAwesomeIcon icon={faCalendarAlt} />
+          <span>{recipe.date}</span>
         </div>
-        <div style={{ color: "#B55D51" }}>
-          <FontAwesomeIcon icon={faComments} /><span> {commentCount} Comments</span>
+        <div style={{ color: '#B55D51', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <FontAwesomeIcon icon={faComments} />
+          <span>{commentCount} Comments</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
           {renderStars(recipe.rating)}
         </div>
-        {!isAdmin &&  (<div
-          style={{
-            color: isSaved ? '#FFFFFF' : '#B55D51',
-            border: `1px solid #B55D51`,
-            backgroundColor: isSaved ? '#B55D51' : 'transparent',
-            padding: '8px 16px',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-          }}
-          onClick={handleAddToFavorites}
-        >
-          <FontAwesomeIcon icon={faHeart} />
-          <span>{isSaved ? 'Saved' : 'Save'}</span>
-        </div>)}
+        {!isAdmin && (
+          <div
+            style={{
+              color: isSaved ? '#FFFFFF' : '#B55D51',
+              border: `1px solid #B55D51`,
+              backgroundColor: isSaved ? '#B55D51' : 'transparent',
+              padding: '8px 16px',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              fontSize: '0.9em',
+            }}
+            onClick={handleAddToFavorites}
+          >
+            <FontAwesomeIcon icon={faHeart} />
+            <span>{isSaved ? 'Saved' : 'Save'}</span>
+          </div>
+        )}
       </div>
     </div>
   );
