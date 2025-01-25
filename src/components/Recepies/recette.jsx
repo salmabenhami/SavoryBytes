@@ -118,7 +118,40 @@ const handleEditRecipe = () => {
           isSaved={isSaved}
           onAddToFavorites={handleAddToFavorites}
         />
+         {/* -------------------------------------------------------------imane's traitement--------------------------------------------------- */}
+              {isAdmin &&  (
+                <div style={{ margin: '40px 23% 0%', display: 'flex', gap: '10px' }}>
+                  <button
+                    onClick={handleEditRecipe}
+                    style={{
+                      backgroundColor: '#4CAF50',
+                      color: 'white',
+                      border: 'none',
+                      padding: '8px 16px',
+                      borderRadius: '5px',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faEdit} /> Edit Recipe
+                  </button>
+                  <button
+                    onClick={handleDeleteRecipe}
+                    style={{
+                      backgroundColor: '#ff4d4d',
+                      color: 'white',
+                      border: 'none',
+                      padding: '8px 16px',
+                      borderRadius: '5px',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faTrash} /> Delete Recipe
+                  </button>
+                </div>
+              )}
+     
             <div style={{ margin: '0 auto', padding: 0, display:'flex' }}>
+              
                 <div style={{ width: '50%', marginLeft: '20px' }}>
                 <img
                   src={recipe.picture}
@@ -145,6 +178,7 @@ const handleEditRecipe = () => {
                 
 
               </div>
+              
         </div>
       </div>
       
@@ -160,37 +194,6 @@ const handleEditRecipe = () => {
         onUpdateComment={handleUpdateComment}
       />
 
-      {/* -------------------------------------------------------------imane's traitement--------------------------------------------------- */}
-      {isAdmin &&  (
-        <div style={{ margin: '20px', display: 'flex', gap: '10px' }}>
-          <button
-            onClick={handleEditRecipe}
-            style={{
-              backgroundColor: '#4CAF50',
-              color: 'white',
-              border: 'none',
-              padding: '8px 16px',
-              borderRadius: '5px',
-              cursor: 'pointer',
-            }}
-          >
-            <FontAwesomeIcon icon={faEdit} /> Edit Recipe
-          </button>
-          <button
-            onClick={handleDeleteRecipe}
-            style={{
-              backgroundColor: '#ff4d4d',
-              color: 'white',
-              border: 'none',
-              padding: '8px 16px',
-              borderRadius: '5px',
-              cursor: 'pointer',
-            }}
-          >
-            <FontAwesomeIcon icon={faTrash} /> Delete Recipe
-          </button>
-        </div>
-      )}
      
       
     </div>
