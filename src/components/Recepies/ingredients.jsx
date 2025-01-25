@@ -21,7 +21,16 @@ const Ingredients=()=>{
     r => r.recipeTitle.toLowerCase().replace(/ /g, '-') === title.toLowerCase()
   );
     return(
-        <div>
+        <div  style={{
+          marginLeft: '200px',
+          backgroundColor: "#f9f9f9",          
+          color: 'black',
+          height: '280px',
+          width: '60%',
+          textAlign: 'center',
+          borderRadius: "5px",
+          padding: '5px',
+          }}>
         <h2>Ingredients</h2>
         <ul>
             {Object.entries(recipe.ingredients).map(([ingredient, quantity]) => (

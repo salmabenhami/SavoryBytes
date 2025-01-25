@@ -1,4 +1,3 @@
-
 import React from "react";
 import styled from "styled-components";
 import h1 from "../images/manuel photo/h1.png";
@@ -53,7 +52,8 @@ const Manuel = () => {
     <ManuelContainer>
       <Title>Manuel d'Utilisation de SavoryBytes</Title>
       <Paragraph>
-        Bienvenue sur SavoryBytes ! Ce manuel vous guidera à travers les fonctionnalités de notre application.
+        Bienvenue sur SavoryBytes ! Ce manuel vous guidera à travers les
+        fonctionnalités de notre application.
       </Paragraph>
 
       <SectionTitle>1. Accueil</SectionTitle>

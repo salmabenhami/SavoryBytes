@@ -14,7 +14,7 @@ const Instruction = () => {
     );
 
     return (
-        <div>
+        <div style={{marginLeft:'40px'}}>
             <h2>Instructions</h2>
             <ol>
                 {recipe.preparationSteps.map((instruction, index) => (
