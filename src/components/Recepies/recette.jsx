@@ -43,12 +43,13 @@ const RecipeDetails = () => {
     console.log("Found user:", user);
     return user ? user.username : 'User1';
   };
-  const commentsWithUsernames = recipe.comments
-    ? recipe.comments.map((comment) => ({
-        ...comment,
-        username: getCommenterUsername(comment.user),
-      }))
-    : []; 
+  const commentsWithUsernames = recipe && recipe.comments
+  ? recipe.comments.map((comment) => ({
+      ...comment,
+      username: getCommenterUsername(comment.user),
+    }))
+  : [];
+
 
 
 //-----------------------------------------imane's traitement---------------------------------------------------------------
@@ -65,7 +66,8 @@ const handleAddToFavorites = () => {
     }));
     setIsSaved(true);
     }
-};
+  };
+  
 
   const handleDeleteRecipe = () => {
     if (recipe) {
