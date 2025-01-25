@@ -16,6 +16,7 @@ import RecipeHeader from './recipeheader';
 import CommentForm from './commentaire';
 import {  deleteComment, updateComment } from '../../redux/recepiesReducer';
 import CommentList from './commentlist'; 
+import Calcul from './calcul'
 
 const RecipeDetails = () => {
   const { title } = useParams();
@@ -34,14 +35,7 @@ const RecipeDetails = () => {
   const recipe = recipes.find(
     r => r.recipeTitle.toLowerCase().replace(/ /g, '-') === title.toLowerCase()
   );
-  const renderStars = (rating) => {
-    const fullStars = Math.floor(rating);
-    const stars = [];
-    for (let i = 1; i <= fullStars; i++) {
-      stars.push(<FontAwesomeIcon key={i} icon={faStar} className="star filled" />);
-    }
-    return stars;
-  };
+  
   const getCommenterUsername = (userId) => {
     const userIdNumber = Number(userId);
     const user = users.find((user) => user.id === userIdNumber);
@@ -55,92 +49,104 @@ const RecipeDetails = () => {
         username: getCommenterUsername(comment.user),
       }))
     : []; 
-  const [checkedIngredients, setCheckedIngredients] = useState({});
 
 
 //-----------------------------------------imane's traitement---------------------------------------------------------------
-  const handleAddToFavorites = () => {
-    if (!currentUser) {
-      navigate('/login');
-      return;
-    }
-
-    if (recipe) {
-      dispatch(addToFavorites({ 
-        userId: currentUser.id, 
-        recipe 
-      }));
-      setIsSaved(true)
-    }
-  };
-
-    const handleDeleteRecipe = () => {
-      if (recipe) {
-        const isConfirmed = window.confirm('Are you sure you want to delete this recipe?');
-        if (isConfirmed) {
-          dispatch(removeRecipe({ mode: recipe.mode, id: recipe.id }));
-          alert('Recipe deleted successfully!');
-          navigate('/');
-        }
-      }
-    };
-
-  const handleEditRecipe = () => {
-    navigate(`/edit-recipe/${recipe.recipeTitle.replace(/\s+/g, '-')}`);
-  };
-
- //-------------------------------------------------------------------------------------------------------------------------------
-  const isAdmin = currentUser && currentUser.role === 'admin';
-
-  if (!recipe) {
-    return <p>Recipe not found.</p>;
+const handleAddToFavorites = () => {
+  if (!currentUser) {
+    navigate('/login');
+    return;
   }
 
-  const handleDeleteComment = (recipeId, commentId) => {
-    const isConfirmed = window.confirm('Are you sure you want to delete this comment?');
-    if (isConfirmed) {
-      dispatch(deleteComment({ recipeId, commentId }));
-      alert('Comment deleted successfully!');
+  if (recipe) {
+    dispatch(addToFavorites({
+      userId: currentUser.id,
+      recipe
+    }));
+    setIsSaved(true);
+    }
+};
+
+  const handleDeleteRecipe = () => {
+    if (recipe) {
+      const isConfirmed = window.confirm('Are you sure you want to delete this recipe?');
+      if (isConfirmed) {
+        dispatch(removeRecipe({ mode: recipe.mode, id: recipe.id }));
+        alert('Recipe deleted successfully!');
+        navigate('/');
+      }
     }
   };
- 
-  const handleUpdateComment = (recipeId, commentId, updatedData) => {
-    dispatch(updateComment({ recipeId, commentId, updatedComment: updatedData }));
-    alert('Comment updated successfully!');
-  };
+
+const handleEditRecipe = () => {
+  navigate(`/edit-recipe/${recipe.recipeTitle.replace(/\s+/g, '-')}`);
+};
+
+ //-------------------------------------------------------------------------------------------------------------------------------
+ const isAdmin = currentUser && currentUser.role === 'admin';
+
+ if (!recipe) {
+   return <p>Recipe not found.</p>;
+ }
+
+ const handleDeleteComment = (recipeId, commentId) => {
+   const isConfirmed = window.confirm('Are you sure you want to delete this comment?');
+   if (isConfirmed) {
+     dispatch(deleteComment({ recipeId, commentId }));
+     alert('Comment deleted successfully!');
+   }
+ };
+
+ const handleUpdateComment = (recipeId, commentId, updatedData) => {
+   dispatch(updateComment({ recipeId, commentId, updatedComment: updatedData }));
+   alert('Comment updated successfully!');
+ };
+
 
 
   return (
     <div>
       <Chemin/>
-      <RecipeHeader 
-    recipe={recipe}
-    isSaved={isSaved}
-    onAddToFavorites={handleAddToFavorites}
-  />
-
-     
       
-      <div style={{ margin: '0 auto', padding: 0 }}>
-        <div style={{ width: '50%', marginLeft: '20px' }}>
-          <img
-            src={recipe.picture}
-            style={{
-              width: '100%',
-              height: '700px',
-              objectFit: 'contain',
-              borderRadius: '10px',
-            }}
-            alt={recipe.recipeTitle}
-          />
+      <div>
+        <div>
+            <RecipeHeader 
+          recipe={recipe}
+          isSaved={isSaved}
+          onAddToFavorites={handleAddToFavorites}
+        />
+            <div style={{ margin: '0 auto', padding: 0, display:'flex' }}>
+                <div style={{ width: '50%', marginLeft: '20px' }}>
+                <img
+                  src={recipe.picture}
+                  style={{
+                    marginLeft: '30px',
+                    marginTop: '10px',
+                    width: '100%', 
+                    maxWidth: '100%', 
+                    height: 'auto', 
+                    maxHeight: '500px', 
+                    objectFit: 'cover', 
+                    border: '1px solid #ccc', 
+                    borderRadius: '10px', 
+                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                  }}
+                  alt={recipe.recipeTitle}
+                />
+                </div>
+                <div style={{display:'flex',flexDirection:'column'}}>
+                  <NutritionFacts/>
+                  <Ingredients/>
+                </div>
+                
+
+              </div>
         </div>
-        </div>
+      </div>
       <PreparationTime/>
-      <NutritionFacts/>
       <Instruction/>
-      <Ingredients/>
-      <CommentForm recipeId={recipe.id} />
-      <h3>Commentaires</h3>
+      <Calcul/>
+
       <CommentList
         comments={commentsWithUsernames}
         currentUser={currentUser}
@@ -149,6 +155,7 @@ const RecipeDetails = () => {
         onDeleteComment={handleDeleteComment}
         onUpdateComment={handleUpdateComment}
       />
+
       {/* -------------------------------------------------------------imane's traitement--------------------------------------------------- */}
       {isAdmin &&  (
         <div style={{ margin: '20px', display: 'flex', gap: '10px' }}>
