@@ -117,7 +117,8 @@
     color: white;
     width: 80%;
     margin-left: 10%;
-    margin-top: 20px;
+    padding: 2%;
+    margin-top:2%;
 }
 
 .add-recipe-form-container .btn-submit:hover {
