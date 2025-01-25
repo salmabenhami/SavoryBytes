@@ -7,43 +7,18 @@ import { div } from "framer-motion/client";
 import TopRecipes from '../Recepies/toprecipies';
 import Popularcat from '../Recepies/popular';
 import Latest from '../Recepies/latestreceip';
-
+import ListCard from "./ListCard";
 const Home = () => {
   const { normal, dietFriendly, lactoseFree } = useSelector((state) => state.recipes);
 
   const allRecipes = [...normal, ...dietFriendly, ...lactoseFree];
-  const top10Recipes = allRecipes
-    .sort((a, b) => b.rating - a.rating)
-    .slice(0, 12);
 
   return (
     <div className="center-container">
       <TopRecipes />
       <Popularcat />
       <Latest />
-      {top10Recipes.length > 0 ? (
-        <div className="card-container">
-          {top10Recipes.map((recipe) => {
-            const mode = recipe.mode;
-            const categ = recipe.category;
-            return (
-              <div  className="card-wrapper">
-                <Link
-                key={recipe.id}
-                to={`/recette/${mode}/${categ}/${encodeURIComponent(
-                  recipe.recipeTitle.toLowerCase().replace(/ /g, '-')
-                )}`}
-                 className="plain-link"
-              >
-                <Card recipe={recipe} />
-              </Link>
-              </div>
-            );
-          })}
-        </div>
-      )  : (
-        <p>Aucune recette trouvée pour cette catégorie.</p>
-      )}
+      <ListCard normal={normal} dietFriendly={dietFriendly} lactoseFree={lactoseFree} />
     </div>
   );
 };
