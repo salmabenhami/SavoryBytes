@@ -150,7 +150,7 @@ const handleEditRecipe = () => {
                 </div>
               )}
      
-            <div style={{ margin: '0 auto', padding: 0, display:'flex' }}>
+            <div style={{ margin: '0 auto', padding: 0, display:'flex',     flexWrap: "wrap" }}>
               
                 <div style={{ width: '50%', marginLeft: '20px' }}>
                 <img
@@ -169,15 +169,21 @@ const handleEditRecipe = () => {
                   alt={recipe.recipeTitle}
                 />
                 </div>
-                <div style={{display:'flex',flexDirection:'column'}}>
-                  <NutritionFacts/>
-                  <Ingredients/>
-                  
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '20px',
+                    padding: '20px',
+                    maxWidth: '1200px', 
+                  }}
+                >
+                  <NutritionFacts />
+                  <Ingredients />
                 </div>
                 
 
-              </div>
-              
+              </div>   
         </div>
       </div>
       

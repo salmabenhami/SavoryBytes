@@ -16,7 +16,7 @@ function Latest() {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            margin: '100px'
+            margin: '2%'
         }}>
             <h1 style={{ fontFamily: 'serif' }}>Latest Recipes</h1>
             <div style={{

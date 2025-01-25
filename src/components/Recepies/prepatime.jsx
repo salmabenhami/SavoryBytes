@@ -12,7 +12,7 @@ const PreparationTime = () => {
         r => r.recipeTitle.toLowerCase().replace(/ /g, '-') === title.toLowerCase()
       );
     return (
-    <div style={{display:'flex',flexDirection:'row',justifyContent:'space-around', width:'50%'}}>
+    <div style={{display:'flex',flexDirection:'row',justifyContent:'space-around', width:'50%',flexWrap: "wrap"}}>
         <div style={{display:'flex', flexDirection:'column'}}>
           <p style={{color:'grey', fontWeight:'bold'}}>Preparation Time</p>
           <p style={{ fontWeight:'bold',fontSize:'12px',textAlign:'center'}}>{recipe.preparationTime}</p>
