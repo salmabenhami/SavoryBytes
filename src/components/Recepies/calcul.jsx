@@ -100,16 +100,16 @@ const styles = {
         width: '80px',
         padding: '10px',
         fontSize: '16px',
-        border: '2px solid black', // Black border
+        border: '2px solid black', 
         borderRadius: '5px',
         textAlign: 'center',
-        backgroundColor: '#fff', // White background
+        backgroundColor: '#fff',
         color: '#333',
     },
     button: {
-        backgroundColor: '#fff', // White background
+        backgroundColor: '#fff',
         color: '#333',
-        border: '2px solid black', // Black border
+        border: '2px solid black', 
         borderRadius: '5px',
         padding: '10px 20px',
         fontSize: '16px',

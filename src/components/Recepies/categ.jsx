@@ -5,6 +5,7 @@ import { selectFilteredRecipes  } from  '../../redux/recepiesReducer';
 import { Link } from 'react-router-dom';
 import Card from '../pages/Card';
 import "../../styles/CardStyle.css";
+import Chemin from './chemin';
 const Categories = () => {
   const { mode, categ } = useParams();
 
@@ -12,10 +13,8 @@ const Categories = () => {
 
   return (
     <div>
-      <h1 className='title'> 
-        Mode {mode.charAt(0).toUpperCase() + mode.slice(1).toLowerCase()} - 
-        Category: {categ.charAt(0).toUpperCase() + categ.slice(1).toLowerCase()}
-      </h1>
+      <Chemin/>
+      
 
       <div className='center-container' >
       {recipes.length > 0 ? (

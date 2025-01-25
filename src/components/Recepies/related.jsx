@@ -10,14 +10,14 @@ function RelatedRecipes({ currentRecipe }) {
   ]);
 
   const relatedRecipes = allData.filter(
-    (item) => item.category === currentRecipe.category && item.id !== currentRecipe.id
+    (item) => item.category === currentRecipe.category && item.id !== currentRecipe.id && item.mode=== currentRecipe.mode
   );
 
   const sortedRelatedRecipes = [...relatedRecipes].sort((a, b) => b.rating - a.rating);
   const topRelatedRecipes = sortedRelatedRecipes.slice(0, 3);
 
   return (
-    <div style={{marginRight:'200px'}}>
+    <div style={{marginRight:'200px',marginBottom:'10px'}}>
       <h2>Related recipes</h2>
       <div>
         {topRelatedRecipes.map((item) => (

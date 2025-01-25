@@ -26,6 +26,7 @@ const NutritionFacts = () => {
             textAlign: 'center',
             borderRadius: "5px",
             padding: '5px',
+            alignItems:'center'
             }}
         >
         <h2>Nutrition Facts</h2>
