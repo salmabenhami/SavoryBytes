@@ -42,6 +42,7 @@ function RelatedRecipes({ currentRecipe }) {
                   borderRadius: "10px",
                   objectFit: "cover",
                   marginRight: "20px",
+                  marginTop:'10px'
                 }}
               />
               <h3 style={{ fontSize: "1.5rem" }}>{item.recipeTitle}</h3>
