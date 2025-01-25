@@ -14,8 +14,8 @@ const NutritionFacts = () => {
       r => r.recipeTitle.toLowerCase().replace(/ /g, '-') === title.toLowerCase()
     );
     return(
-        <div>
-        <h2>Nutrition Facts</h2>
+        <div >
+        <h2 >Nutrition Facts</h2>
         <ul>
           <li>Calories: {recipe.nutritionFacts.calories}</li>
           <li>Protein: {recipe.nutritionFacts.protein}</li>

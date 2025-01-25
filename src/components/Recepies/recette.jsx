@@ -114,10 +114,10 @@ const RecipeDetails = () => {
     <div>
       <Chemin/>
       <RecipeHeader 
-  recipe={recipe}
-  isSaved={isSaved}
-  onAddToFavorites={handleAddToFavorites}
-/>
+    recipe={recipe}
+    isSaved={isSaved}
+    onAddToFavorites={handleAddToFavorites}
+  />
 
      
       
@@ -180,35 +180,7 @@ const RecipeDetails = () => {
           </button>
         </div>
       )}
-      <div style={{ margin: '0 auto', padding: 0 }}>
-        <div style={{ width: '50%', marginLeft: '20px' }}>
-          <img
-            src={recipe.picture}
-            style={{
-              width: '100%',
-              height: '700px',
-              objectFit: 'contain',
-              borderRadius: '10px',
-            }}
-            alt={recipe.recipeTitle}
-          />
-        </div>
-        </div>
-
-      <PreparationTime/>
-      <NutritionFacts/>
-      <Instruction/>
-      <Ingredients/>
-      <CommentForm recipeId={recipe.id} />
-      <h3>Commentaires</h3>
-      <CommentList
-        comments={commentsWithUsernames}
-        currentUser={currentUser}
-        isAdmin={isAdmin}
-        recipeId={recipe.id}
-        onDeleteComment={handleDeleteComment}
-        onUpdateComment={handleUpdateComment}
-      />
+     
       
     </div>
   );
