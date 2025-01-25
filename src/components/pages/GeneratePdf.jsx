@@ -1,7 +1,6 @@
 import { pdf, Document, Page, Text, View, StyleSheet, Image } from "@react-pdf/renderer";
 import { saveAs } from "file-saver";
 
-// Importer les images
 import h1 from "../images/manuel photo/h1.png";
 import h2 from "../images/manuel photo/h2.png";
 import s from "../images/manuel photo/s.png";
@@ -17,7 +16,7 @@ import dr1 from "../images/manuel photo/dr1.png";
 import dr2 from "../images/manuel photo/dr2.png";
 import md from "../images/manuel photo/md.png";
 
-// Définir les styles pour le PDF
+
 const styles = StyleSheet.create({
   page: {
     flexDirection: "column",
@@ -50,7 +49,6 @@ const styles = StyleSheet.create({
   },
 });
 
-// Composant ManuelPDF
 const ManuelPDF = () => (
   <Document>
     <Page size="A4" style={styles.page}>
