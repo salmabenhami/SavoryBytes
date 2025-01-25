@@ -59,7 +59,6 @@ const Signup = () => {
         joinedDate: new Date(),
       };
       dispatch(signupSuccess(newUser));
-      alert('Registration successful!');
       navigate('/login');
       resetForm();
     }
