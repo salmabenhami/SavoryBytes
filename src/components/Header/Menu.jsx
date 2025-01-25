@@ -5,6 +5,7 @@ import { selectCategories } from "../../redux/recepiesReducer";
 
 const Menu=()=>{
     const [selectedMode, setSelectedMode] = useState('normal')
+    
     const navigate = useNavigate()
     const {name, role} = useSelector((state)=>state.auth.currentUser || {})
     const categories = useSelector(state => selectCategories(state, selectedMode));
@@ -35,7 +36,7 @@ const Menu=()=>{
                 </div>
             </li>
             <li className="dropdown" onClick={(e)=>handleCateg(e)}>
-                <Link className="dropdown-link">categories</Link>
+                <Link className="dropdown-link">Categories</Link>
                 <div class="dropdown-content">
                     {categories.map((category) => (
                         <p  class="dropdown-item "
@@ -49,6 +50,11 @@ const Menu=()=>{
                 </div>
             </li>
             <li><NavLink to="/about" className="a"> About </NavLink></li>
+            {role==='user' && (
+                    <li>
+                        <NavLink to="/favorites" className="a">Favorites</NavLink>
+                    </li>
+                )}
             {role && <li><NavLink to="/profil" className="a">Profil</NavLink></li>}
             {role === 'admin' && <li className="dropdown">
                 <Link>Manager</Link>

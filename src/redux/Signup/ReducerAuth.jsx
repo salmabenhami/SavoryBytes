@@ -16,6 +16,7 @@ const initialState = {
       profilePicture: user1 ,
       bio: "i'm the admin",
       joinedDate: "2023-01-10",
+     
     },
     {
       id: 2,
@@ -26,6 +27,7 @@ const initialState = {
       profilePicture: user2,
       bio: '',
       joinedDate: "2024-01-10",
+      favorites: [],
     },
     {
       id: 3,
@@ -36,6 +38,7 @@ const initialState = {
       profilePicture: user3,
       bio: "Passionate about discovering new flavors and recipes.",
       joinedDate: "2024-01-10",
+      favorites: [],
     },
     
   ],
@@ -130,19 +133,64 @@ const authSlice = createSlice({
     setProfile(state, action) {
       const { id, ...updatedData } = action.payload;
 
-      // Update the currentUser if it matches the ID
       if (state.currentUser && state.currentUser.id === id) {
         state.currentUser = { ...state.currentUser, ...updatedData };
       }
 
-      // Update the user in the users array if needed
       const userIndex = state.users.findIndex((user) => user.id === id);
       if (userIndex !== -1) {
         state.users[userIndex] = { ...state.users[userIndex], ...updatedData };
       }
     },
-  },
- 
+    addToFavorites: (state, action) => {
+      const { userId, recipe } = action.payload;
+      const userIndex = state.users.findIndex((user) => user.id === userId);
+    
+      if (userIndex !== -1) {
+        if (!state.users[userIndex].favorites) {
+          state.users[userIndex].favorites = [];
+        }
+    
+        const isAlreadyFavorite = state.users[userIndex].favorites.some(
+          (fav) => fav.recipeTitle === recipe.recipeTitle
+        );
+    
+        if (!isAlreadyFavorite) {
+          state.users[userIndex].favorites.push(recipe);
+        }
+      }
+    
+      if (state.currentUser && state.currentUser.id === userId) {
+        if (!state.currentUser.favorites) {
+          state.currentUser.favorites = [];
+        }
+    
+        const isAlreadyFavorite = state.currentUser.favorites.some(
+          (fav) => fav.recipeTitle === recipe.recipeTitle
+        );
+    
+        if (!isAlreadyFavorite) {
+          state.currentUser.favorites.push(recipe);
+        }
+      }
+    },
+    removeFromFavorites: (state, action) => {
+      const { userId, recipeTitle } = action.payload;
+      const userIndex = state.users.findIndex((user) => user.id === userId);
+
+      if (userIndex !== -1) {
+        state.users[userIndex].favorites = state.users[userIndex].favorites.filter(
+          (fav) => fav.recipeTitle !== recipeTitle
+        );
+      }
+
+      if (state.currentUser && state.currentUser.id === userId) {
+        state.currentUser.favorites = state.currentUser.favorites.filter(
+          (fav) => fav.recipeTitle !== recipeTitle
+        );
+      }
+    },
+  }
 });
 
 export const {
@@ -157,7 +205,10 @@ export const {
   sortdate,
   searchuser,
   sortrole,
-  setProfile
+  setProfile,
+  addToFavorites,
+  removeFromFavorites,
+
 } = authSlice.actions;
 
 export default authSlice.reducer;
