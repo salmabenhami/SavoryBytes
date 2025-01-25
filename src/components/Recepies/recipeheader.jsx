@@ -1,8 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCalendarAlt, faComments, faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 
-const RecipeHeader = ({ recipe, isSaved, handleAddToFavorites, renderStars }) => {
+const RecipeHeader = () => {
+  const { title } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.auth.currentUser);
+  
+  const recipes = useSelector((state) => [
+    ...state.recipes.normal,
+    ...state.recipes.lactoseFree,
+    ...state.recipes.dietFriendly,
+  ]);
+
+  const users = useSelector((state) => state.auth.users);
+  const [isSaved, setIsSaved] = useState(false);
+
+  const renderStars = (rating) => {
+    const fullStars = Math.floor(rating);
+    const stars = [];
+    for (let i = 1; i <= fullStars; i++) {
+      stars.push(<FontAwesomeIcon key={i} icon={faStar} className="star filled" />);
+    }
+    return stars;
+  };
+
+  // Recherche de la recette en fonction du titre
+  const recipe = recipes.find(
+    (r) => r.recipeTitle.toLowerCase().replace(/ /g, '-') === title.toLowerCase()
+  );
+
+  // Si aucune recette n'est trouvée, retourner un message d'erreur
+  if (!recipe) {
+    return <p>Recipe not found.</p>;
+  }
+
+  // Vérification si les commentaires existent avant d'afficher leur nombre
+  const commentCount = recipe.comments ? recipe.comments.length : 0;
+
   return (
     <div>
       <div>
@@ -16,31 +54,15 @@ const RecipeHeader = ({ recipe, isSaved, handleAddToFavorites, renderStars }) =>
           <FontAwesomeIcon icon={faCalendarAlt} /><span> {recipe.date}</span>
         </div>
         <div style={{ color: "#B55D51" }}>
-          <FontAwesomeIcon icon={faComments} /> <span> {recipe.comments.length} comments</span>
+          <FontAwesomeIcon icon={faComments} /> <span> {commentCount} comments</span>
         </div>
         <div style={{ color: "#B55D51" }}>
           <b>{recipe.rating}</b>
           {renderStars(recipe.rating)}
         </div>
-        <div
-          style={{
-            color: isSaved ? '#FFFFFF' : '#B55D51', 
-            border: `1px solid #B55D51`, 
-            backgroundColor: isSaved ? '#B55D51' : 'transparent', 
-            padding: '8px 16px', 
-            borderRadius: '5px', 
-            cursor: 'pointer', 
-            display: 'inline-flex',
-            alignItems: 'center', 
-            gap: '8px', 
-          }}
-          onClick={handleAddToFavorites} 
-        >
-          <FontAwesomeIcon icon={faHeart} />
-          <span>{isSaved ? 'Saved' : 'Save'}</span>
+        
         </div>
       </div>
-    </div>
   );
 };
 

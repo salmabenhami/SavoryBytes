@@ -4,47 +4,45 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch} from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt, faUser, faComments, faHeart, faStar, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { addToFavorites } from '../../redux/Signup/ReducerAuth';
 import { useNavigate } from 'react-router-dom';
-import { removeRecipe, deleteComment, updateComment } from '../../redux/recepiesReducer';
-import NutritionFacts from './nutritionfacts';
-import Ingredients from './ingredients';
+import { removeRecipe } from '../../redux/recepiesReducer';
 import Chemin from './chemin';
 import PreparationTime from './prepatime';
+import NutritionFacts from './nutritionfacts';
 import Instruction from './instruction';
-import Calcul from './calcul';
-import CommentForm from './commentaire';
+import Ingredients from './ingredients';
 import RecipeHeader from './recipeheader';
+import CommentForm from './commentaire';
+import {  deleteComment, updateComment } from '../../redux/recepiesReducer';
 import CommentList from './commentlist'; 
 
 const RecipeDetails = () => {
   const { title } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [isSaved, setIsSaved] = useState(false);
-
+  const currentUser = useSelector((state) => state.auth.currentUser);
   const recipes = useSelector(state => [
     ...state.recipes.normal,
     ...state.recipes.lactoseFree,
     ...state.recipes.dietFriendly,
   ]);
+  const users = useSelector(state => state.auth.users); 
+  const [isSaved, setIsSaved] = useState(false);
+
 
   const recipe = recipes.find(
     r => r.recipeTitle.toLowerCase().replace(/ /g, '-') === title.toLowerCase()
   );
-
-  const [checkedIngredients, setCheckedIngredients] = useState({});
-  const currentUser = useSelector(state => state.auth.currentUser);
-  const users = useSelector(state => state.auth.users); 
-
-  console.log("Users list from Redux:", users);
-
-  if (!recipe) {
-    return <p>Recipe not found.</p>;
-  }
-  const isAdmin = currentUser && currentUser.role === 'admin';
-
+  const renderStars = (rating) => {
+    const fullStars = Math.floor(rating);
+    const stars = [];
+    for (let i = 1; i <= fullStars; i++) {
+      stars.push(<FontAwesomeIcon key={i} icon={faStar} className="star filled" />);
+    }
+    return stars;
+  };
   const getCommenterUsername = (userId) => {
     const userIdNumber = Number(userId); 
     const user = users.find((user) => user.id === userIdNumber);
@@ -52,13 +50,14 @@ const RecipeDetails = () => {
     console.log("Found user:", user);
     return user ? user.username : 'User1';
   };
+  const commentsWithUsernames = recipe.comments
+    ? recipe.comments.map((comment) => ({
+        ...comment,
+        username: getCommenterUsername(comment.user),
+      }))
+    : []; 
+  const [checkedIngredients, setCheckedIngredients] = useState({});
 
-  const handleCheckboxChange = (ingredient) => {
-    setCheckedIngredients(prevState => ({
-      ...prevState,
-      [ingredient]: !prevState[ingredient],
-    }));
-  };
 
 //-----------------------------------------imane's traitement---------------------------------------------------------------
   const handleAddToFavorites = () => {
@@ -67,28 +66,36 @@ const RecipeDetails = () => {
       return;
     }
 
-  if (recipe) {
-    dispatch(addToFavorites({ 
-      userId: currentUser.id, 
-      recipe 
-    }));
-    setIsSaved(!isSaved)  }
-};
-
-  const handleDeleteRecipe = () => {
     if (recipe) {
-      const isConfirmed = window.confirm('Are you sure you want to delete this recipe?');
-      if (isConfirmed) {
-        dispatch(removeRecipe({ mode: recipe.mode, id: recipe.id }));
-        alert('Recipe deleted successfully!');
-        navigate('/');
-      }
+      dispatch(addToFavorites({ 
+        userId: currentUser.id, 
+        recipe 
+      }));
+      setIsSaved(true)
     }
   };
+
+    const handleDeleteRecipe = () => {
+      if (recipe) {
+        const isConfirmed = window.confirm('Are you sure you want to delete this recipe?');
+        if (isConfirmed) {
+          dispatch(removeRecipe({ mode: recipe.mode, id: recipe.id }));
+          alert('Recipe deleted successfully!');
+          navigate('/');
+        }
+      }
+    };
 
   const handleEditRecipe = () => {
     navigate(`/edit-recipe/${recipe.recipeTitle.replace(/\s+/g, '-')}`);
   };
+
+ //-------------------------------------------------------------------------------------------------------------------------------
+  const isAdmin = currentUser && currentUser.role === 'admin';
+
+  if (!recipe) {
+    return <p>Recipe not found.</p>;
+  }
 
   const handleDeleteComment = (recipeId, commentId) => {
     const isConfirmed = window.confirm('Are you sure you want to delete this comment?');
@@ -103,30 +110,39 @@ const RecipeDetails = () => {
     alert('Comment updated successfully!');
   };
 
-  const renderStars = (rating) => {
-    const fullStars = Math.floor(rating);
-    const stars = [];
-    for (let i = 1; i <= fullStars; i++) {
-      stars.push(<FontAwesomeIcon key={i} icon={faStar} className="star filled" />);
-    }
-    return stars;
-  };
-  const commentsWithUsernames = recipe.comments
-    ? recipe.comments.map((comment) => ({
-        ...comment,
-        username: getCommenterUsername(comment.user),
-      }))
-    : []; 
 
   return (
     <div>
-      <Chemin />
-      <RecipeHeader
-        recipe={recipe}
-        isSaved={isSaved}
-        handleAddToFavorites={handleAddToFavorites}
-        renderStars={renderStars}
-      />
+      <Chemin/>
+      <RecipeHeader/>
+     
+      <div style={{ display: 'flex', justifyContent: 'space-around', width: '60%', marginLeft: '0px' }}>
+       
+       {!isAdmin&&(
+           <div
+                    style={{
+                      color: isSaved ? '#FFFFFF' : '#B55D51',
+                      border: `1px solid #B55D51`,
+                      backgroundColor: isSaved ? '#B55D51' : 'transparent',
+                      padding: '8px 16px',
+                      borderRadius: '5px',
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                    }}
+                    onClick={handleAddToFavorites}
+                  >
+                    <FontAwesomeIcon icon={faHeart} />
+                    <span>{isSaved ? 'Saved' : 'Save'}</span>
+                  </div>
+       )}
+        
+        <div style={{ color: '#B55D51' }}>
+          <b>{recipe.rating}</b>
+          {renderStars(recipe.rating)}
+        </div>
+      </div>
       <div style={{ margin: '0 auto', padding: 0 }}>
         <div style={{ width: '50%', marginLeft: '20px' }}>
           <img
@@ -135,17 +151,16 @@ const RecipeDetails = () => {
               width: '100%',
               height: '700px',
               objectFit: 'contain',
-              borderRadius: '10px'
+              borderRadius: '10px',
             }}
             alt={recipe.recipeTitle}
           />
         </div>
-      </div>
-      <Ingredients />
-      <PreparationTime />
-      <Calcul />
-      <NutritionFacts />
-      <Instruction />
+        </div>
+      <PreparationTime/>
+      <NutritionFacts/>
+      <Instruction/>
+      <Ingredients/>
       <CommentForm recipeId={recipe.id} />
       <h3>Commentaires</h3>
       <CommentList
@@ -156,7 +171,8 @@ const RecipeDetails = () => {
         onDeleteComment={handleDeleteComment}
         onUpdateComment={handleUpdateComment}
       />
-      {isAdmin && (
+      {/* -------------------------------------------------------------imane's traitement--------------------------------------------------- */}
+      {isAdmin &&  (
         <div style={{ margin: '20px', display: 'flex', gap: '10px' }}>
           <button
             onClick={handleEditRecipe}
