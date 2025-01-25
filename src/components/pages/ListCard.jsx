@@ -1,39 +1,44 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import Card from './Card';
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Card from './Card'; 
 
-const ListCard = () => {
-  const { normal, lactoseFree, dietFriendly } = useSelector((state) => state.recipes);
-  const [mode, setMode] = useState('Normal');
+const ListCard = ({ normal, dietFriendly, lactoseFree }) => {
 
-  const getRecipes = () => {
-    switch (mode) {
-      case 'LactoseFree':
-        return lactoseFree;
-      case 'DietFriendly':
-        return dietFriendly;
-      default:
-        return normal;
-    }
-  };
+  const allRecipes = [...normal, ...dietFriendly, ...lactoseFree];
+
+  const top10Recipes = allRecipes
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 12);
 
   return (
-    <div className="card-container">
-      <div>
-        <select
-          onChange={(e) => setMode(e.target.value)}
-          value={mode}
-          className="form-control mb-3"
-        >
-          <option value="Normal">Normal</option>
-          <option value="DietFriendly">Diet Friendly</option>
-          <option value="LactoseFree">Lactose Free</option>
-        </select>
-      </div>
-      {getRecipes().map((recipe) => (
-        <Card key={recipe.id} recipe={recipe} />
-      ))}
+    <div style={{ margin: '2%' }}>
+      <div> <h1>Top Recipes</h1></div>
+  
+      {top10Recipes.length > 0 ? (
+        <div>
+         
+          <div className="card-container">
+            {top10Recipes.map((recipe) => {
+              const mode = recipe.mode;
+              const categ = recipe.category;
+              return (
+                <div key={recipe.id} className="card-wrapper">
+                  <Link
+                    to={`/recette/${mode}/${categ}/${encodeURIComponent(
+                      recipe.recipeTitle.toLowerCase().replace(/ /g, '-')
+                    )}`}
+                    className="plain-link"
+                  >
+                    <Card recipe={recipe} />
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ) : (
+        <p>Aucune recette disponible.</p>
+      )}
     </div>
   );
 };

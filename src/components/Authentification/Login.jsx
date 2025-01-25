@@ -73,7 +73,7 @@ const Login = () => {
             {error && <p className="error">{error}</p>}
             <button type="submit">Log in</button>
           </form>
-          <NavLink to="/about" className="signin"> Sign in </NavLink>
+          <NavLink to="/about" className="signin"> Sign Up </NavLink>
 
         </div>
       </div>

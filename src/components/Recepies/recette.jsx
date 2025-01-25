@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch} from 'react-redux';
@@ -44,9 +43,9 @@ const RecipeDetails = () => {
     return stars;
   };
   const getCommenterUsername = (userId) => {
-    const userIdNumber = Number(userId); 
+    const userIdNumber = Number(userId);
     const user = users.find((user) => user.id === userIdNumber);
-
+ 
     console.log("Found user:", user);
     return user ? user.username : 'User1';
   };
@@ -62,7 +61,7 @@ const RecipeDetails = () => {
 //-----------------------------------------imane's traitement---------------------------------------------------------------
   const handleAddToFavorites = () => {
     if (!currentUser) {
-      navigate('/login'); 
+      navigate('/login');
       return;
     }
 
@@ -104,7 +103,7 @@ const RecipeDetails = () => {
       alert('Comment deleted successfully!');
     }
   };
-
+ 
   const handleUpdateComment = (recipeId, commentId, updatedData) => {
     dispatch(updateComment({ recipeId, commentId, updatedComment: updatedData }));
     alert('Comment updated successfully!');
@@ -181,8 +180,39 @@ const RecipeDetails = () => {
           </button>
         </div>
       )}
+      <div style={{ margin: '0 auto', padding: 0 }}>
+        <div style={{ width: '50%', marginLeft: '20px' }}>
+          <img
+            src={recipe.picture}
+            style={{
+              width: '100%',
+              height: '700px',
+              objectFit: 'contain',
+              borderRadius: '10px',
+            }}
+            alt={recipe.recipeTitle}
+          />
+        </div>
+        </div>
+
+      <PreparationTime/>
+      <NutritionFacts/>
+      <Instruction/>
+      <Ingredients/>
+      <CommentForm recipeId={recipe.id} />
+      <h3>Commentaires</h3>
+      <CommentList
+        comments={commentsWithUsernames}
+        currentUser={currentUser}
+        isAdmin={isAdmin}
+        recipeId={recipe.id}
+        onDeleteComment={handleDeleteComment}
+        onUpdateComment={handleUpdateComment}
+      />
+      
     </div>
   );
 };
-
+ 
 export default RecipeDetails;
+ 
