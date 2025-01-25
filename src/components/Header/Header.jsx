@@ -1,11 +1,10 @@
 // Header.js
 import React from "react";
-import styled from "styled-components"; 
+import styled from "styled-components";
 import Logo from "./Logo";
 import Menu from "./Menu";
 import Buttons from "./Button";
 import { generatePDF } from "../pages/GeneratePdf";
-
 
 const DownloadButton = styled.button`
   background-color: #b55d51;
@@ -32,8 +31,7 @@ const Header = () => {
       <Menu />
       <div className="btnbox">
         <Buttons />
-   
-        <DownloadButton onClick={generatePDF}>
+        <DownloadButton onClick={() => generatePDF()}>
           Télécharger le Manuel
         </DownloadButton>
       </div>
