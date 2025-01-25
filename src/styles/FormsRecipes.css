@@ -93,8 +93,12 @@
 .add-recipe-form-container .btn-danger {
     background-color: #ff6b6b; 
     color: white;
+    padding: 2%;
+   
 }
-
+.container-btn-danger{
+    height: 50px;
+}
 .add-recipe-form-container .btn-danger:hover {
     background-color: #ff5252; 
 }
@@ -113,7 +117,8 @@
     color: white;
     width: 80%;
     margin-left: 10%;
-    margin-top: 20px;
+    padding: 2%;
+    margin-top:2%;
 }
 
 .add-recipe-form-container .btn-submit:hover {
@@ -195,15 +200,15 @@
 
 
 .add-recipe-form-container .btn-add {
-    background-color: #6bccb9;
+    background-color: #6bccb9; 
     color: white;
-    padding: 5px 10px;
-    font-size: 0.8rem; 
-    border: none;
-    border-radius: 4px;
+    padding: 2%;
+    font-size: 0.8rem;
+    border: none; 
+    border-radius: 4px; 
     cursor: pointer;
     transition: background-color 0.3s;
-    text-align: center;
+    text-align: center; 
 }
 
 .add-recipe-form-container .btn-add:hover {
@@ -224,44 +229,42 @@
         font-size: 1rem;
     }
 }
-/* Conteneur de la zone de glisser-déposer */
 .dropzone {
-    width: 90%; /* Largeur de 90% pour correspondre aux autres champs */
-    margin-left: 5%; /* Marge à gauche pour centrer */
-    margin-bottom: 5%; /* Marge en bas pour l'espacement */
-    padding: 20px; /* Espacement interne */
-    border: 2px dashed #ccc; /* Bordure en pointillés */
-    border-radius: 8px; /* Coins arrondis */
-    background-color: #f9f9f9; /* Fond légèrement gris */
-    text-align: center; /* Centrer le texte */
-    cursor: pointer; /* Curseur pointer pour indiquer que c'est cliquable */
-    transition: border-color 0.3s, background-color 0.3s; /* Transition fluide */
+    width: 90%; 
+    margin-left: 5%; 
+    margin-bottom: 5%; 
+    padding: 20px; 
+    border: 2px dashed #ccc; 
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: center;
+    cursor: pointer; 
+    transition: border-color 0.3s, background-color 0.3s; 
 }
 
-/* Style lorsque la zone est survolée ou active */
+
 .dropzone:hover,
 .dropzone:focus {
-    border-color: #888; /* Changement de couleur de bordure */
-    background-color: #f0f0f0; /* Fond légèrement plus foncé */
+    border-color: #888; 
+    background-color: #f0f0f0;
 }
 
-/* Style lorsque la zone est en train de recevoir un fichier */
+
 .dropzone.dragover {
-    border-color: #6bccb9; /* Couleur verte pastel pour indiquer l'action */
-    background-color: #e0f2f1; /* Fond plus clair pour l'effet visuel */
+    border-color: #6bccb9; 
+    background-color: #e0f2f1;
 }
 
-/* Texte à l'intérieur de la zone de glisser-déposer */
 .dropzone p {
-    margin: 0; /* Supprimer la marge par défaut */
-    color: #555; /* Couleur du texte */
-    font-size: 1rem; /* Taille de police standard */
+    margin: 0; 
+    color: #555;
+    font-size: 1rem; 
 }
 
-/* Aperçu de l'image dans la zone de glisser-déposer */
+
 .dropzone .uploaded-image {
-    max-width: 100%; /* Largeur maximale */
-    max-height: 200px; /* Hauteur maximale */
-    border-radius: 8px; /* Coins arrondis */
-    margin-top: 10px; /* Espacement au-dessus de l'image */
+    max-width: 100%;
+    max-height: 200px; 
+    border-radius: 8px;
+    margin-top: 10px; 
 }
