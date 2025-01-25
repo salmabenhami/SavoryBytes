@@ -97,6 +97,7 @@ const Button = styled.button`
 
 
 const AboutChef = () => {
+  
   return (
     <div>
       <Box
@@ -131,6 +132,7 @@ const AboutChef = () => {
         
       </SubBox>
     </Box>
+   
     
     </div>
     
