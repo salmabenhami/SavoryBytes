@@ -24,7 +24,7 @@ const AddRecipeForm = () => {
     author: '',
     picture: null,
     ingredients: {}, 
-    preparationSteps: [''], 
+    preparationSteps: [], 
     nutritionFacts: {
       calories: '',
       protein: '',
@@ -361,13 +361,15 @@ const AddRecipeForm = () => {
               className="form-control"
               required
             />
+            <div  className='container-btn-danger'>
             <button
-              type="button"
-              className="btn btn-danger"
-              onClick={() => removeIngredient(ingredientName)}
-            >
-              Remove
-            </button>
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={() => removeIngredient(ingredientName)}
+                >
+                  Remove
+                </button>
+            </div>
           </div>
         ))}
         <button type="button" className="btn btn-add" onClick={addIngredient}>
@@ -378,7 +380,8 @@ const AddRecipeForm = () => {
       {/* Preparation Steps */}
       <div className="mb-3">
         <label className="form-label">Preparation Steps</label>
-        {formData.preparationSteps.map((step, index) => (
+        {formData.preparationSteps.length > 0 &&(
+        formData.preparationSteps.map((step, index) => (
           <div key={index} className="step-row">
             <textarea
               value={step}
@@ -386,6 +389,7 @@ const AddRecipeForm = () => {
               className="form-control"
               required
             />
+            <div className='container-btn-danger'>
             <button
               type="button"
               className="btn btn-danger"
@@ -393,8 +397,9 @@ const AddRecipeForm = () => {
             >
               Remove
             </button>
+            </div>
           </div>
-        ))}
+        )))}
         <button type="button" className="btn btn-add" onClick={addStep}>
           Add Preparation Step
         </button>
