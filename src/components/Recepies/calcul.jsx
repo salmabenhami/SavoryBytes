@@ -28,9 +28,8 @@ const Calcul = () => {
 
     return (
         <div>
-            <h2>{recipe.recipeTitle}</h2>
+            <h3>Serving :</h3>
             <label>
-                Ingrédients:
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <button
                         style={buttonStyle}
@@ -51,7 +50,6 @@ const Calcul = () => {
                 </div>
             </label>
 
-            <h3>Ingrédients :</h3>
             <div style={{display:'flex',flexDirection:'column',justifyContent:'space-around', width:'50%'}}>
                 {Object.entries(ingredients).map(([ingredient, quantity]) => {
                     const originalQuantity = parseFloat(quantity) || 0;

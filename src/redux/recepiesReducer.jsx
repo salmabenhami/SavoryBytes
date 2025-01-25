@@ -76,7 +76,6 @@ const recipesSlice = createSlice({
       }
     },
 
-    // Modifier un commentaire
     updateComment: (state, action) => {
       const { recipeId, commentId, updatedComment } = action.payload;
       const categories = ['normal', 'lactoseFree', 'dietFriendly'];
