@@ -23,7 +23,7 @@ function TopRecipes() {
   }, [topRecipes.length]);
  
   return (
-<div style={{ width: "80%", margin: "auto", position: "relative" }}>
+<div style={{ width: "90%", margin: "2%", position: "relative" }}>
 <div
         style={{
           display: "flex",

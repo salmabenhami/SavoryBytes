@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addComment } from '../../redux/recepiesReducer';
 import { v4 as uuidv4 } from 'uuid';
-import Comments from './commentlist';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 

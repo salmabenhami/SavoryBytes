@@ -26,7 +26,8 @@ const NutritionFacts = () => {
             textAlign: 'center',
             borderRadius: "5px",
             padding: '5px',
-            alignItems:'center'
+            alignItems:'center',
+            flexWrap: "wrap"
             }}
         >
         <h2>Nutrition Facts</h2>

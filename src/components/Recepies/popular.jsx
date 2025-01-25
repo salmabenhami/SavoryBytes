@@ -27,7 +27,7 @@ function Popularcat() {
     };
 
     return (
-        <div style={{ margin: "80px" }}>
+        <div style={{ margin: "2%" }}>
             <h1 style={{ fontFamily: 'serif', margin: '10px' }}>Popular Categories</h1>
             <div style={{ display: 'flex', marginTop: "20px", justifyContent: 'space-around', flexWrap: 'wrap' }}>
                 {uniqueCategories.map((category, index) => {

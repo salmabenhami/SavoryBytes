@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch} from 'react-redux';
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarAlt, faUser, faComments, faHeart, faStar, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { addToFavorites } from '../../redux/Signup/ReducerAuth';
 import { useNavigate } from 'react-router-dom';
 import { removeRecipe } from '../../redux/recepiesReducer';
@@ -13,11 +12,9 @@ import NutritionFacts from './nutritionfacts';
 import Instruction from './instruction';
 import Ingredients from './ingredients';
 import RecipeHeader from './recipeheader';
-import CommentForm from './commentaire';
-import {  deleteComment, updateComment } from '../../redux/recepiesReducer';
+import { deleteComment, updateComment } from '../../redux/recepiesReducer';
 import CommentList from './commentlist'; 
 import Calcul from './calcul'
-import RelatedRecipes from './related';
 
 const RecipeDetails = () => {
   const { title } = useParams();
@@ -53,7 +50,6 @@ const RecipeDetails = () => {
 
 
 
-//-----------------------------------------imane's traitement---------------------------------------------------------------
 const handleAddToFavorites = () => {
   if (!currentUser) {
     navigate('/login');
@@ -85,7 +81,6 @@ const handleEditRecipe = () => {
   navigate(`/edit-recipe/${recipe.recipeTitle.replace(/\s+/g, '-')}`);
 };
 
- //-------------------------------------------------------------------------------------------------------------------------------
  const isAdmin = currentUser && currentUser.role === 'admin';
 
  if (!recipe) {
@@ -118,7 +113,6 @@ const handleEditRecipe = () => {
           isSaved={isSaved}
           onAddToFavorites={handleAddToFavorites}
         />
-         {/* -------------------------------------------------------------imane's traitement--------------------------------------------------- */}
               {isAdmin &&  (
                 <div style={{ margin: '40px 23% 0%', display: 'flex', gap: '10px' }}>
                   <button
@@ -150,7 +144,7 @@ const handleEditRecipe = () => {
                 </div>
               )}
      
-            <div style={{ margin: '0 auto', padding: 0, display:'flex' }}>
+            <div style={{ margin: '0 auto', padding: 0, display:'flex',     flexWrap: "wrap" }}>
               
                 <div style={{ width: '50%', marginLeft: '20px' }}>
                 <img
@@ -169,15 +163,21 @@ const handleEditRecipe = () => {
                   alt={recipe.recipeTitle}
                 />
                 </div>
-                <div style={{display:'flex',flexDirection:'column'}}>
-                  <NutritionFacts/>
-                  <Ingredients/>
-                  
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '20px',
+                    padding: '20px',
+                    maxWidth: '1200px', 
+                  }}
+                >
+                  <NutritionFacts />
+                  <Ingredients />
                 </div>
                 
 
-              </div>
-              
+              </div>   
         </div>
       </div>
       
