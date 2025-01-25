@@ -15,6 +15,7 @@ import ad from "../images/manuel photo/ad.png";
 import cm from "../images/manuel photo/cm.png";
 import dr1 from "../images/manuel photo/dr1.png";
 import dr2 from "../images/manuel photo/dr2.png";
+import md from "../images/manuel photo/md.png";
 
 // Définir les styles pour le PDF
 const styles = StyleSheet.create({
@@ -122,7 +123,7 @@ const ManuelPDF = () => (
       <Text style={styles.paragraph}>
         Pour l'administrateur, dans les détails de la recette, vous trouverez des options pour modifier ou supprimer la recette. Vous pourrez ainsi mettre à jour les informations de la recette.
       </Text>
-      <Image src={cm} style={styles.image} />
+      <Image src={md} style={styles.image} />
 
       {/* Section 10 : Détails de la Recette */}
       <Text style={styles.sectionTitle}>10. Détails de la Recette</Text>
@@ -131,10 +132,12 @@ const ManuelPDF = () => (
       </Text>
       <Image src={dr1} style={styles.image} />
       <Image src={dr2} style={styles.image} />
+      <Image src={cm} style={styles.image} />
+
     </Page>
   </Document>
 );
-$
+
 export const generatePDF = async () => {
   const blob = await pdf(<ManuelPDF />).toBlob();
   saveAs(blob, "manuel_savorybytes.pdf");
