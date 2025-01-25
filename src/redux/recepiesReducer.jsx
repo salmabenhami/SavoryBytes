@@ -45,6 +45,55 @@ const recipesSlice = createSlice({
         };
       }
     },
+    addComment: (state, action) => {
+      const { recipeId, comment } = action.payload;
+      const categories = ['normal', 'lactose-free', 'diet'];
+      let recipe = null;
+      let category = null;
+      for (const cat of categories) {
+        recipe = state[cat].find(recipe => recipe.id === recipeId);
+        if (recipe) {
+          category = cat;
+          break;
+        }
+      }
+      if (recipe) {
+        if (!recipe.comments) {
+          recipe.comments = [];
+        }
+        recipe.comments.push(comment);
+      }
+    },
+    deleteComment: (state, action) => {
+      const { recipeId, commentId } = action.payload;
+      const categories = ['normal', 'lactoseFree', 'dietFriendly'];
+      for (const cat of categories) {
+        const recipe = state[cat].find(recipe => recipe.id === recipeId);
+        if (recipe && recipe.comments) {
+          recipe.comments = recipe.comments.filter(comment => comment.id !== commentId);
+          break;
+        }
+      }
+    },
+
+    // Modifier un commentaire
+    updateComment: (state, action) => {
+      const { recipeId, commentId, updatedComment } = action.payload;
+      const categories = ['normal', 'lactoseFree', 'dietFriendly'];
+      for (const cat of categories) {
+        const recipe = state[cat].find(recipe => recipe.id === recipeId);
+        if (recipe && recipe.comments) {
+          const commentIndex = recipe.comments.findIndex(comment => comment.id === commentId);
+          if (commentIndex !== -1) {
+            recipe.comments[commentIndex] = {
+              ...recipe.comments[commentIndex],
+              ...updatedComment,
+            };
+            break;
+          }
+        }
+      }
+    },
   },
 });
 
@@ -114,7 +163,7 @@ export const getRecipesByMode = (state, mode) => {
   return recipes
 };
 
-export const { addRecipe, removeRecipe, updateRecipe } = recipesSlice.actions;
+export const { addRecipe, removeRecipe, updateRecipe, addComment, deleteComment,updateComment } = recipesSlice.actions;
 
 
 export default recipesSlice.reducer;

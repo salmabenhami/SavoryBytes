@@ -36,7 +36,7 @@ const Menu=()=>{
                 </div>
             </li>
             <li className="dropdown" onClick={(e)=>handleCateg(e)}>
-                <Link className="dropdown-link">categories</Link>
+                <Link className="dropdown-link">Categories</Link>
                 <div class="dropdown-content">
                     {categories.map((category) => (
                         <p  class="dropdown-item "

@@ -4,16 +4,26 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch} from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarAlt, faUser, faComments, faHeart, faStar, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
 import { addToFavorites } from '../../redux/Signup/ReducerAuth';
 import { useNavigate } from 'react-router-dom';
-import { removeRecipe } from '../../redux/recepiesReducer';
+import { removeRecipe, deleteComment, updateComment } from '../../redux/recepiesReducer';
+import NutritionFacts from './nutritionfacts';
+import Ingredients from './ingredients';
+import Chemin from './chemin';
+import PreparationTime from './prepatime';
+import Instruction from './instruction';
+import Calcul from './calcul';
+import CommentForm from './commentaire';
+import RecipeHeader from './recipeheader';
+import CommentList from './commentlist'; 
 
 const RecipeDetails = () => {
   const { title } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const currentUser = useSelector((state) => state.auth.currentUser);
+  const [isSaved, setIsSaved] = useState(false);
+
   const recipes = useSelector(state => [
     ...state.recipes.normal,
     ...state.recipes.lactoseFree,
@@ -25,6 +35,23 @@ const RecipeDetails = () => {
   );
 
   const [checkedIngredients, setCheckedIngredients] = useState({});
+  const currentUser = useSelector(state => state.auth.currentUser);
+  const users = useSelector(state => state.auth.users); 
+
+  console.log("Users list from Redux:", users);
+
+  if (!recipe) {
+    return <p>Recipe not found.</p>;
+  }
+  const isAdmin = currentUser && currentUser.role === 'admin';
+
+  const getCommenterUsername = (userId) => {
+    const userIdNumber = Number(userId); 
+    const user = users.find((user) => user.id === userIdNumber);
+
+    console.log("Found user:", user);
+    return user ? user.username : 'User1';
+  };
 
   const handleCheckboxChange = (ingredient) => {
     setCheckedIngredients(prevState => ({
@@ -40,36 +67,41 @@ const RecipeDetails = () => {
       return;
     }
 
+  if (recipe) {
+    dispatch(addToFavorites({ 
+      userId: currentUser.id, 
+      recipe 
+    }));
+    setIsSaved(!isSaved)  }
+};
+
+  const handleDeleteRecipe = () => {
     if (recipe) {
-      dispatch(addToFavorites({ 
-        userId: currentUser.id, 
-        recipe 
-      }));
-      navigate('/favorites'); 
+      const isConfirmed = window.confirm('Are you sure you want to delete this recipe?');
+      if (isConfirmed) {
+        dispatch(removeRecipe({ mode: recipe.mode, id: recipe.id }));
+        alert('Recipe deleted successfully!');
+        navigate('/');
+      }
     }
   };
-
-    const handleDeleteRecipe = () => {
-      if (recipe) {
-        const isConfirmed = window.confirm('Are you sure you want to delete this recipe?');
-        if (isConfirmed) {
-          dispatch(removeRecipe({ mode: recipe.mode, id: recipe.id }));
-          alert('Recipe deleted successfully!');
-          navigate('/');
-        }
-      }
-    };
 
   const handleEditRecipe = () => {
     navigate(`/edit-recipe/${recipe.recipeTitle.replace(/\s+/g, '-')}`);
   };
 
- //-------------------------------------------------------------------------------------------------------------------------------
-  const isAdmin = currentUser && currentUser.role === 'admin';
+  const handleDeleteComment = (recipeId, commentId) => {
+    const isConfirmed = window.confirm('Are you sure you want to delete this comment?');
+    if (isConfirmed) {
+      dispatch(deleteComment({ recipeId, commentId }));
+      alert('Comment deleted successfully!');
+    }
+  };
 
-  if (!recipe) {
-    return <p>Recipe not found.</p>;
-  }
+  const handleUpdateComment = (recipeId, commentId, updatedData) => {
+    dispatch(updateComment({ recipeId, commentId, updatedComment: updatedData }));
+    alert('Comment updated successfully!');
+  };
 
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
@@ -79,91 +111,22 @@ const RecipeDetails = () => {
     }
     return stars;
   };
-  const renderIngredients = () => {
-    if (Array.isArray(recipe.ingredients)) {
-      
-      return recipe.ingredients.map((ingredient, index) => (
-        <li key={index}>
-          <label
-            style={{
-              textDecoration: checkedIngredients[ingredient.name] ? 'line-through' : 'none',
-              color: checkedIngredients[ingredient.name] ? 'gray' : 'black',
-            }}
-          >
-            <input
-              type="checkbox"
-              checked={checkedIngredients[ingredient.name] || false}
-              onChange={() => handleCheckboxChange(ingredient.name)}
-            />
-            <span>{ingredient.value}</span> {ingredient.name}
-          </label>
-        </li>
-      ));
-    } else if (typeof recipe.ingredients === 'object') {
-     
-      return Object.entries(recipe.ingredients || {}).map(([ingredient, quantity], index) => (
-        <li key={index}>
-          <label
-            style={{
-              textDecoration: checkedIngredients[ingredient] ? 'line-through' : 'none',
-              color: checkedIngredients[ingredient] ? 'gray' : 'black',
-            }}
-          >
-            <input
-              type="checkbox"
-              checked={checkedIngredients[ingredient] || false}
-              onChange={() => handleCheckboxChange(ingredient)}
-            />
-            <span>{quantity}</span> {ingredient}
-          </label>
-        </li>
-      ));
-    } else {
-      return <li>No ingredients found.</li>;
-    }
-  };
+  const commentsWithUsernames = recipe.comments
+    ? recipe.comments.map((comment) => ({
+        ...comment,
+        username: getCommenterUsername(comment.user),
+      }))
+    : []; 
 
   return (
     <div>
-      <span style={{ fontStyle: 'italic', color: 'gray', marginLeft: '40px' }}>
-        <Link to={`/${recipe.mode}`} style={{ color: 'gray', textDecoration: 'none' }}>
-          Mode{'>'}{recipe.mode}
-        </Link>
-        {' > '}
-        <Link to={`/${recipe.mode}/${recipe.category.replace(/\s+/g, '-')}`} style={{ color: 'gray', textDecoration: 'none' }}>
-          {recipe.category}
-        </Link>
-        {' > '}
-        <Link to={`/${recipe.mode}/${recipe.category.replace(/\s+/g, '-')}/${recipe.recipeTitle.replace(/\s+/g, '-')}`} style={{ color: 'gray', textDecoration: 'none' }}>
-          {recipe.recipeTitle}
-        </Link>
-      </span>
-      <div>
-        <h1 style={{ marginLeft: '40px' }}>{recipe.description}</h1>
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'space-around', width: '60%', marginLeft: '0px' }}>
-        <div style={{ color: '#B55D51' }}>
-          <FontAwesomeIcon icon={faUser} />
-          <span> {recipe.author}</span>
-        </div>
-        <div style={{ color: '#B55D51' }}>
-          <FontAwesomeIcon icon={faCalendarAlt} />
-          <span> {recipe.date}</span>
-        </div>
-        <div style={{ color: '#B55D51' }}>
-          <FontAwesomeIcon icon={faComments} /> <span> {recipe.comments?.length || 0} comments</span>
-        </div>
-       {!isAdmin&&(
-          <div style={{ color: '#B55D51', cursor: 'pointer' }} onClick={handleAddToFavorites}>
-            <FontAwesomeIcon icon={faHeart} /> <span>Save</span>
-          </div>
-       )}
-        
-        <div style={{ color: '#B55D51' }}>
-          <b>{recipe.rating}</b>
-          {renderStars(recipe.rating)}
-        </div>
-      </div>
+      <Chemin />
+      <RecipeHeader
+        recipe={recipe}
+        isSaved={isSaved}
+        handleAddToFavorites={handleAddToFavorites}
+        renderStars={renderStars}
+      />
       <div style={{ margin: '0 auto', padding: 0 }}>
         <div style={{ width: '50%', marginLeft: '20px' }}>
           <img
@@ -172,44 +135,28 @@ const RecipeDetails = () => {
               width: '100%',
               height: '700px',
               objectFit: 'contain',
-              borderRadius: '10px',
+              borderRadius: '10px'
             }}
             alt={recipe.recipeTitle}
           />
         </div>
       </div>
-
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', width: '50%' }}>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <p style={{ color: 'grey', fontWeight: 'bold' }}>Preparation Time</p>
-          <p style={{ fontWeight: 'bold', fontSize: '12px', textAlign: 'center' }}>{recipe.preparationTime}</p>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <p style={{ color: 'grey', fontWeight: 'bold' }}>Cooking Time</p>
-          <p style={{ fontWeight: 'bold', fontSize: '12px', textAlign: 'center' }}>{recipe.cookingTime}</p>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <p style={{ color: 'grey', fontWeight: 'bold' }}>Serving</p>
-          <p style={{ fontWeight: 'bold', fontSize: '12px', textAlign: 'center' }}>{recipe.servings} serving</p>
-        </div>
-      </div>
-      <div>
-      <h2>Nutrition Facts</h2>
-        <ul>
-          <li>Calories: {recipe.nutritionFacts?.calories || 'N/A'}</li>
-          <li>Protein: {recipe.nutritionFacts?.protein || 'N/A'}</li>
-          <li>Carbohydrates: {recipe.nutritionFacts?.carbohydrates || 'N/A'}</li>
-          <li>Fat: {recipe.nutritionFacts?.fat || 'N/A'}</li>
-          </ul>
-      </div>
-      <div>
-        <h2>Ingredients</h2>
-        <ul>
-          {renderIngredients()}
-        </ul>
-      </div>
-      {/* -------------------------------------------------------------imane's traitement--------------------------------------------------- */}
-      {isAdmin &&  (
+      <Ingredients />
+      <PreparationTime />
+      <Calcul />
+      <NutritionFacts />
+      <Instruction />
+      <CommentForm recipeId={recipe.id} />
+      <h3>Commentaires</h3>
+      <CommentList
+        comments={commentsWithUsernames}
+        currentUser={currentUser}
+        isAdmin={isAdmin}
+        recipeId={recipe.id}
+        onDeleteComment={handleDeleteComment}
+        onUpdateComment={handleUpdateComment}
+      />
+      {isAdmin && (
         <div style={{ margin: '20px', display: 'flex', gap: '10px' }}>
           <button
             onClick={handleEditRecipe}
