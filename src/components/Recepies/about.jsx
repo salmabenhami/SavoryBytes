@@ -115,11 +115,11 @@ const AboutChef = () => {
       <SubBox>
         <motion.div
           id="img"
-          initial={{ opacity: 0, y: 50 }} // La div commence invisible et légèrement en dessous.
-          animate={{ opacity: 1, y: 0 }} // La div devient visible et remonte.
+          initial={{ opacity: 0, y: 50 }} 
+          animate={{ opacity: 1, y: 0 }} 
           transition={{
-            duration: 1.5, // Durée de l'animation.
-            delay: 1, // Délai avant que l'animation ne commence.
+            duration: 1.5,
+            delay: 1, 
           }}
         >
           <img
