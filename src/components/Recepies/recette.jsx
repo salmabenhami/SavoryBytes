@@ -15,8 +15,8 @@ import Ingredients from './ingredients';
 import RecipeHeader from './recipeheader';
 import CommentForm from './commentaire';
 import {  deleteComment, updateComment } from '../../redux/recepiesReducer';
-import CommentList from './commentlist';
- 
+import CommentList from './commentlist'; 
+
 const RecipeDetails = () => {
   const { title } = useParams();
   const dispatch = useDispatch();
@@ -27,9 +27,10 @@ const RecipeDetails = () => {
     ...state.recipes.lactoseFree,
     ...state.recipes.dietFriendly,
   ]);
-  const users = useSelector(state => state.auth.users);
- 
- 
+  const users = useSelector(state => state.auth.users); 
+  const [isSaved, setIsSaved] = useState(false);
+
+
   const recipe = recipes.find(
     r => r.recipeTitle.toLowerCase().replace(/ /g, '-') === title.toLowerCase()
   );
@@ -53,32 +54,26 @@ const RecipeDetails = () => {
         ...comment,
         username: getCommenterUsername(comment.user),
       }))
-    : [];
+    : []; 
   const [checkedIngredients, setCheckedIngredients] = useState({});
- 
-  const handleCheckboxChange = (ingredient) => {
-    setCheckedIngredients(prevState => ({
-      ...prevState,
-      [ingredient]: !prevState[ingredient],
-    }));
-  };
- 
+
+
 //-----------------------------------------imane's traitement---------------------------------------------------------------
   const handleAddToFavorites = () => {
     if (!currentUser) {
       navigate('/login');
       return;
     }
- 
+
     if (recipe) {
-      dispatch(addToFavorites({
-        userId: currentUser.id,
-        recipe
+      dispatch(addToFavorites({ 
+        userId: currentUser.id, 
+        recipe 
       }));
-      navigate('/favorites');
+      setIsSaved(true)
     }
   };
- 
+
     const handleDeleteRecipe = () => {
       if (recipe) {
         const isConfirmed = window.confirm('Are you sure you want to delete this recipe?');
@@ -89,18 +84,18 @@ const RecipeDetails = () => {
         }
       }
     };
- 
+
   const handleEditRecipe = () => {
     navigate(`/edit-recipe/${recipe.recipeTitle.replace(/\s+/g, '-')}`);
   };
- 
+
  //-------------------------------------------------------------------------------------------------------------------------------
   const isAdmin = currentUser && currentUser.role === 'admin';
- 
+
   if (!recipe) {
     return <p>Recipe not found.</p>;
   }
- 
+
   const handleDeleteComment = (recipeId, commentId) => {
     const isConfirmed = window.confirm('Are you sure you want to delete this comment?');
     if (isConfirmed) {
@@ -113,40 +108,71 @@ const RecipeDetails = () => {
     dispatch(updateComment({ recipeId, commentId, updatedComment: updatedData }));
     alert('Comment updated successfully!');
   };
- 
- 
+
+
   return (
     <div>
       <Chemin/>
-      <div>
-        <h1 style={{ marginLeft: '40px' }}>{recipe.description}</h1>
-      </div>
+      <RecipeHeader/>
+     
       <div style={{ display: 'flex', justifyContent: 'space-around', width: '60%', marginLeft: '0px' }}>
-        <div style={{ color: '#B55D51' }}>
-          <FontAwesomeIcon icon={faUser} />
-          <span> {recipe.author}</span>
-        </div>
-        <div style={{ color: '#B55D51' }}>
-          <FontAwesomeIcon icon={faCalendarAlt} />
-          <span> {recipe.date}</span>
-        </div>
-        <div style={{ color: '#B55D51' }}>
-          <FontAwesomeIcon icon={faComments} /> <span> {recipe.comments?.length || 0} comments</span>
-        </div>
-       {!isAdmin&&(
-          <div style={{ color: '#B55D51', cursor: 'pointer' }} onClick={handleAddToFavorites}>
-            <FontAwesomeIcon icon={faHeart} /> <span>Save</span>
-          </div>
-       )}
        
+       {!isAdmin&&(
+           <div
+                    style={{
+                      color: isSaved ? '#FFFFFF' : '#B55D51',
+                      border: `1px solid #B55D51`,
+                      backgroundColor: isSaved ? '#B55D51' : 'transparent',
+                      padding: '8px 16px',
+                      borderRadius: '5px',
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                    }}
+                    onClick={handleAddToFavorites}
+                  >
+                    <FontAwesomeIcon icon={faHeart} />
+                    <span>{isSaved ? 'Saved' : 'Save'}</span>
+                  </div>
+       )}
+        
         <div style={{ color: '#B55D51' }}>
           <b>{recipe.rating}</b>
           {renderStars(recipe.rating)}
         </div>
       </div>
+      <div style={{ margin: '0 auto', padding: 0 }}>
+        <div style={{ width: '50%', marginLeft: '20px' }}>
+          <img
+            src={recipe.picture}
+            style={{
+              width: '100%',
+              height: '700px',
+              objectFit: 'contain',
+              borderRadius: '10px',
+            }}
+            alt={recipe.recipeTitle}
+          />
+        </div>
+        </div>
+      <PreparationTime/>
+      <NutritionFacts/>
+      <Instruction/>
+      <Ingredients/>
+      <CommentForm recipeId={recipe.id} />
+      <h3>Commentaires</h3>
+      <CommentList
+        comments={commentsWithUsernames}
+        currentUser={currentUser}
+        isAdmin={isAdmin}
+        recipeId={recipe.id}
+        onDeleteComment={handleDeleteComment}
+        onUpdateComment={handleUpdateComment}
+      />
       {/* -------------------------------------------------------------imane's traitement--------------------------------------------------- */}
       {isAdmin &&  (
-        <div style={{ margin: '10px 15% 10px', display: 'flex', gap: '10px' }}>
+        <div style={{ margin: '20px', display: 'flex', gap: '10px' }}>
           <button
             onClick={handleEditRecipe}
             style={{
