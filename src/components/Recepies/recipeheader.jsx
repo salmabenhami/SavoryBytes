@@ -9,7 +9,7 @@ const RecipeHeader = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const currentUser = useSelector((state) => state.auth.currentUser);
-  
+
   const recipes = useSelector((state) => [
     ...state.recipes.normal,
     ...state.recipes.lactoseFree,
@@ -19,12 +19,54 @@ const RecipeHeader = () => {
   const users = useSelector((state) => state.auth.users);
   const [isSaved, setIsSaved] = useState(false);
 
+  // Fonction pour afficher les étoiles
   const renderStars = (rating) => {
-    const fullStars = Math.floor(rating);
+    const fullStars = Math.floor(rating); // Nombre d'étoiles pleines
+    const hasHalfStar = rating % 1 !== 0; // Vérifie s'il y a une étoile à moitié pleine
+    const emptyStars = 5 - Math.ceil(rating); // Nombre d'étoiles vides
+
     const stars = [];
-    for (let i = 1; i <= fullStars; i++) {
-      stars.push(<FontAwesomeIcon key={i} icon={faStar} className="star filled" />);
+
+    // Ajouter les étoiles pleines
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(
+        <FontAwesomeIcon
+          key={`full-${i}`}
+          icon={faStar}
+          style={{ color: '#B55D51', fontSize: '1.2em' }} // Couleur dorée pour les étoiles pleines
+        />
+      );
     }
+
+    // Ajouter l'étoile à moitié pleine si nécessaire
+    if (hasHalfStar) {
+      stars.push(
+        <div key="half-star" style={{ position: 'relative', display: 'inline-block' }}>
+          <FontAwesomeIcon
+            icon={faStar}
+            style={{ color: '#ccc', fontSize: '1.2em' }} // Couleur grise pour la partie vide
+          />
+          <div style={{ position: 'absolute', top: 0, left: 0, width: '50%', overflow: 'hidden' }}>
+            <FontAwesomeIcon
+              icon={faStar}
+              style={{ color: '#B55D51', fontSize: '1.2em' }} // Couleur dorée pour la partie pleine
+            />
+          </div>
+        </div>
+      );
+    }
+
+    // Ajouter les étoiles vides
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push(
+        <FontAwesomeIcon
+          key={`empty-${i}`}
+          icon={faStar}
+          style={{ color: '#ccc', fontSize: '1.2em' }} // Couleur grise pour les étoiles vides
+        />
+      );
+    }
+
     return stars;
   };
 
@@ -56,13 +98,12 @@ const RecipeHeader = () => {
         <div style={{ color: "#B55D51" }}>
           <FontAwesomeIcon icon={faComments} /> <span> {commentCount} comments</span>
         </div>
-        <div style={{ color: "#B55D51" }}>
+        <div style={{ color: "#B55D51", display: 'flex', alignItems: 'center', gap: '5px' }}>
           <b>{recipe.rating}</b>
           {renderStars(recipe.rating)}
         </div>
-        
-        </div>
       </div>
+    </div>
   );
 };
 
