@@ -12,7 +12,11 @@ const Categories = () => {
 
   return (
     <div>
-      <h1>Recettes pour {mode} - {categ}</h1>
+      <h1 className='title'> 
+        Mode {mode.charAt(0).toUpperCase() + mode.slice(1).toLowerCase()} - 
+        Category: {categ.charAt(0).toUpperCase() + categ.slice(1).toLowerCase()}
+      </h1>
+
       <div className='center-container' >
       {recipes.length > 0 ? (
         <div className="card-container">
