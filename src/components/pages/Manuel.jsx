@@ -10,6 +10,10 @@ import f from "../images/manuel photo/f.png"
 import d from "../images/manuel photo/d.png"
 import mu from "../images/manuel photo/mu.png"
 import ad from "../images/manuel photo/ad.png"
+import dr1 from "../images/manuel photo/dr1.png"
+import dr2 from "../images/manuel photo/dr2.png"
+import cm from "../images/manuel photo/cm.png"
+
 
 
 const ManuelContainer = styled.div`
@@ -105,11 +109,14 @@ const Manuel = () => {
       <Paragraph>
       Pour l'administrateur, dans les détails de la recette, vous trouverez des options pour modifier ou supprimer la recette. Vous pourrez ainsi mettre à jour les informations de la recette
       </Paragraph>
+      <Image src={cm} alt="Example Image" />
+
       <SectionTitle>10. Détails de la recette </SectionTitle>
       <Paragraph>
       Sur la page des détails de la recette, vous trouverez toutes les informations relatives à la recette sélectionnée, telles que le titre, les ingrédients, les instructions de préparation, ainsi que des informations nutritionnelles et le temps de préparation. Si vous êtes un administrateur, vous aurez la possibilité de modifier ou de supprimer la recette en cliquant sur les boutons correspondants. Pour les utilisateurs non administrateurs, vous pourrez ajouter la recette à vos favoris en un clic. Les commentaires des utilisateurs sont également affichés, avec des options pour ajouter, modifier ou supprimer les commentaires si vous êtes connecté en tant qu'administrateur.
       </Paragraph>
-      {/* <Image src={dr} alt="Example Image" /> */}
+      <Image src={dr1} alt="Example Image" />
+      <Image src={dr2} alt="Example Image" />
 
     </ManuelContainer>
   );
