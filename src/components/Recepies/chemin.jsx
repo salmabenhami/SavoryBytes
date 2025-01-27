@@ -16,7 +16,6 @@ const Chemin = () => {
 
     return (    
         <span style={{ fontStyle: 'italic', color: 'gray', marginLeft: '40px' }}>
-            {/* Afficher le lien pour Mode */}
             {mode && (
                 <Link 
                     to={`/${mode}`} 
@@ -26,7 +25,6 @@ const Chemin = () => {
                 </Link>
             )}
 
-            {/* Afficher le lien pour Category */}
             {mode && categ && (
                 <>
                     {' > '}
@@ -39,7 +37,6 @@ const Chemin = () => {
                 </>
             )}
 
-            {/* Afficher le lien pour le titre de la recette */}
             {mode && categ && title && (
                 <>
                     {' > '}
